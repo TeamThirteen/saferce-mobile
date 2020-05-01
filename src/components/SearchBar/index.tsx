@@ -11,7 +11,7 @@ interface SearchBarProps {
 const SearchBar: React.FC<SearchBarProps> = ({ onLocationSelect }) => {
   return (
     <GooglePlacesAutocomplete
-      placeholder="Pesquisa padarias, salão de beleza"
+      placeholder="O que você está procurando..."
       placeholderTextColor={Theme.color.secondary}
       returnKeyType="search"
       keyboardAppearance="light"
@@ -38,8 +38,8 @@ const SearchBar: React.FC<SearchBarProps> = ({ onLocationSelect }) => {
           flex: 1,
           backgroundColor: 'transparent',
           height: 55,
-          marginRight: 60,
-          marginLeft: 20,
+          marginRight: 15,
+          marginLeft: 60,
           borderTopWidth: 0,
           borderBottomWidth: 0,
         },
