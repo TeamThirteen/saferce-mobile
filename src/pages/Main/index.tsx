@@ -39,6 +39,7 @@ const Main: React.FC = () => {
   }, []);
 
   const handleLocationMap = useCallback((data, { geometry }) => {
+    console.log(data);
     const {
       location: { lat: latitude, lng: longitude },
     } = geometry;
