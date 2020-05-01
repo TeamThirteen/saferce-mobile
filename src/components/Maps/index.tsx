@@ -17,11 +17,12 @@ interface MapsProps {
 const Maps: React.FC<MapsProps> = ({ placeSelected }) => {
   return (
     <MapView
-      style={{ flex: 1, width: '100%', height: '100%' }}
+      style={{ flex: 1 }}
       initialRegion={placeSelected}
       region={placeSelected}
-      showsUserLocation
-      showsMyLocationButton={false}
+      showsUserLocation={false}
+      showsPointsOfInterest={false}
+      showsCompass={false}
       loadingEnabled
       minZoomLevel={10}
       maxZoomLevel={18}
