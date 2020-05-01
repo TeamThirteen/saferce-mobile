@@ -1,5 +1,5 @@
 import React from 'react';
-import { Platform, Text } from 'react-native';
+import { Platform } from 'react-native';
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 
 import Categories from '../Categories';
@@ -51,6 +51,11 @@ const SearchBar: React.FC<SearchBarProps> = ({ onLocationSelect }) => {
           marginLeft: 0,
           borderTopWidth: 0,
           borderBottomWidth: 0,
+          shadowColor: '#000',
+          shadowOpacity: 0.1,
+          shadowOffset: { x: 0, y: 0 },
+          shadowRadius: 15,
+          elevation: 5,
         },
         textInput: {
           height: 55,
@@ -64,11 +69,6 @@ const SearchBar: React.FC<SearchBarProps> = ({ onLocationSelect }) => {
           marginLeft: 0,
           marginRight: 0,
           fontSize: 14,
-          shadowColor: '#000',
-          shadowOpacity: 0.1,
-          shadowOffset: { x: 0, y: 0 },
-          shadowRadius: 15,
-          elevation: 5,
           borderTopWidth: 0,
           borderBottomWidth: 0,
           borderWidth: 0,
@@ -83,7 +83,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ onLocationSelect }) => {
           borderWidth: 1,
           borderColor: '#DDD',
           backgroundColor: '#FFF',
-          marginTop: 35,
+          marginTop: 8,
         },
         description: {
           fontSize: 16,
