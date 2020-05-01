@@ -16,7 +16,7 @@ const AppRoutes: React.FC = () => (
       },
     }}
   >
-    <App.Screen name="Página Inicial" component={Main} />
+    <App.Screen name="Main" component={Main} />
   </App.Navigator>
 );
 
