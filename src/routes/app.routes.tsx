@@ -3,6 +3,8 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 import Main from '../pages/Main';
 
+import Theme from '../theme';
+
 const App = createStackNavigator();
 
 const AppRoutes: React.FC = () => (
@@ -10,7 +12,7 @@ const AppRoutes: React.FC = () => (
     screenOptions={{
       headerShown: false,
       cardStyle: {
-        backgroundColor: '#FFFFFF',
+        backgroundColor: Theme.color.primary,
       },
     }}
   >
