@@ -9,9 +9,13 @@ import Theme from '../../theme';
 
 interface SearchBarProps {
   onLocationSelect(data: object, details: object): void;
+  onShowCategoriesFilter(): void;
 }
 
-const SearchBar: React.FC<SearchBarProps> = ({ onLocationSelect }) => {
+const SearchBar: React.FC<SearchBarProps> = ({
+  onLocationSelect,
+  onShowCategoriesFilter,
+}) => {
   return (
     <GooglePlacesAutocomplete
       placeholder="O que você está procurando..."
@@ -20,7 +24,9 @@ const SearchBar: React.FC<SearchBarProps> = ({ onLocationSelect }) => {
       keyboardAppearance="light"
       enablePoweredByContainer={false}
       fetchDetails
-      renderLeftButton={() => <Categories />}
+      renderLeftButton={() => (
+        <Categories onShowCategoriesFilter={onShowCategoriesFilter} />
+      )}
       renderRightButton={() => <Profile />}
       textInputProps={{
         autoCapitalize: 'none',
@@ -69,6 +75,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ onLocationSelect }) => {
           marginLeft: 0,
           marginRight: 0,
           fontSize: 14,
+          fontFamily: 'Poppins-Regular',
           borderTopWidth: 0,
           borderBottomWidth: 0,
           borderWidth: 0,

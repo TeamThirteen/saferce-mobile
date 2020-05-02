@@ -2,10 +2,18 @@ import React, { useState, useEffect, useCallback } from 'react';
 
 import Maps from '../../components/Maps';
 import SearchBar from '../../components/SearchBar';
+import ListCategories from '../../components/Categories/ListCategories';
 
 import { Container } from './styles';
 
 import Geolocation from '../../services/geolocation';
+import api from '../../services/api';
+
+interface CategoriesProps {
+  id: number;
+  title: string;
+  image: string;
+}
 
 const Main: React.FC = () => {
   const [userLocation, setUserLocation] = useState({
@@ -14,6 +22,9 @@ const Main: React.FC = () => {
     latitudeDelta: 0.04,
     longitudeDelta: 0.05,
   });
+
+  const [categories, setCategories] = useState([] as CategoriesProps[]);
+  const [showFilterCategory, setShowFilterCategory] = useState(false);
 
   useEffect(() => {
     async function loadUserLocation(): Promise<void> {
@@ -30,8 +41,11 @@ const Main: React.FC = () => {
         };
 
         setUserLocation(coords);
+
+        const response = await api.get<CategoriesProps[]>('categories');
+        setCategories(response.data);
       } catch (error) {
-        throw new Error('Teste');
+        console.log(error);
       }
     }
 
@@ -39,7 +53,6 @@ const Main: React.FC = () => {
   }, []);
 
   const handleLocationMap = useCallback((data, { geometry }) => {
-    console.log(data);
     const {
       location: { lat: latitude, lng: longitude },
     } = geometry;
@@ -54,10 +67,19 @@ const Main: React.FC = () => {
     setUserLocation(placeSelected);
   }, []);
 
+  const handleShowCategoriesFilter = useCallback(() => {
+    setShowFilterCategory(!showFilterCategory);
+  }, [showFilterCategory]);
+
   return (
     <Container>
       <Maps placeSelected={userLocation} />
-      <SearchBar onLocationSelect={handleLocationMap} />
+      <SearchBar
+        onLocationSelect={handleLocationMap}
+        onShowCategoriesFilter={handleShowCategoriesFilter}
+      />
+
+      {showFilterCategory && <ListCategories categories={categories} />}
     </Container>
   );
 };

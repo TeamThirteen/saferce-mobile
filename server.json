@@ -1,0 +1,56 @@
+{
+  "categories": [
+    {
+      "id": 1,
+      "title": "Artesanato",
+      "image": "https://images.unsplash.com/photo-1501436513145-30f24e19fcc8?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
+    },
+    {
+      "id": 2,
+      "title": "Turismo",
+      "image": "https://images.unsplash.com/photo-1502944719-13098b4b18da?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
+    },
+    {
+      "id": 3,
+      "title": "Imóveis",
+      "image": "https://images.unsplash.com/photo-1518277769913-bbd45cae0b47?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
+    },
+    {
+      "id": 4,
+      "title": "Salão de Beleza",
+      "image": "https://images.unsplash.com/photo-1541046194654-5e356c4ec4a0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
+    },
+    {
+      "id": 5,
+      "title": "Barbearia",
+      "image": "https://images.unsplash.com/photo-1494592018820-f954535166d7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
+    },
+    {
+      "id": 6,
+      "title": "Construção",
+      "image": "https://images.unsplash.com/photo-1518796503375-35f076ab2052?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
+    }
+  ],
+  "providers": [
+    {
+      "id": 1,
+      "title": "Diego Souza",
+      "description":"Lorem ipsum dolor met avic.",
+      "image": "https://api.adorable.io/avatars/285/DiegoSouza",
+      "geometry": {
+        "latitude": -22.737761,
+        "longitude": -47.649819
+      }
+    },
+    {
+      "id": 2,
+      "title": "Tierry Ray",
+      "description": "Lorem ipsum dolor met avic." ,
+      "image": "https://api.adorable.io/avatars/285/TierryRay",
+      "geometry": {
+        "latitude": -23.654292,
+        "longitude": -46.594407
+      }
+    }
+  ]
+}

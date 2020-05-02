@@ -3,9 +3,13 @@ import Icon from 'react-native-vector-icons/Feather';
 
 import { Container } from './styles';
 
-const Categories: React.FC = () => {
+interface CategoriesProps {
+  onShowCategoriesFilter(): void;
+}
+
+const Categories: React.FC<CategoriesProps> = ({ onShowCategoriesFilter }) => {
   return (
-    <Container>
+    <Container onPress={onShowCategoriesFilter}>
       <Icon name="feather" color="#FFF" size={22} />
     </Container>
   );
