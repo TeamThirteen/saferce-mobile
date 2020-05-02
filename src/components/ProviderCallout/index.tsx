@@ -1,16 +1,11 @@
 import React from 'react';
 import { Container, ProviderTitle, ProviderCategory } from './styles';
 
-interface GeometryProps {
-  latitude: number;
-  longitude: number;
-}
-
 interface CalloutProps {
   id: number;
   title: string;
   description: string;
-  geometry: GeometryProps;
+  category: string;
 }
 
 interface ProviderProps {
@@ -31,7 +26,7 @@ const ProviderCallout: React.FC<ProviderProps> = ({ provider }) => {
       }}
     >
       <ProviderTitle>{provider.title}</ProviderTitle>
-      <ProviderCategory>{provider.title}</ProviderCategory>
+      <ProviderCategory>{provider.category}</ProviderCategory>
     </Container>
   );
 };

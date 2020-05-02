@@ -35,6 +35,7 @@
     {
       "id": 1,
       "title": "Diego Souza",
+      "category": "Artesanato",
       "description":"Lorem ipsum dolor met avic.",
       "image": "https://api.adorable.io/avatars/285/DiegoSouza",
       "geometry": {
@@ -45,6 +46,7 @@
     {
       "id": 2,
       "title": "Tierry Ray",
+      "category": "Corretor",
       "description": "Lorem ipsum dolor met avic." ,
       "image": "https://api.adorable.io/avatars/285/TierryRay",
       "geometry": {
