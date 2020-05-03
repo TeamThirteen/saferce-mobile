@@ -5,7 +5,7 @@ import LinearGradient from 'react-native-linear-gradient';
 export const Container = styled(LinearGradient)`
   position: absolute;
   width: 100%;
-  height: 240px;
+  height: 200px;
   background: transparent;
   bottom: 0px;
   left: 0;

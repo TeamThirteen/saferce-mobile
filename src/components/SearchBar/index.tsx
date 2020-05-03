@@ -18,7 +18,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
 }) => {
   return (
     <GooglePlacesAutocomplete
-      placeholder="O que você está procurando..."
+      placeholder="Onde você está..."
       placeholderTextColor={Theme.color.secondary}
       returnKeyType="search"
       keyboardAppearance="light"

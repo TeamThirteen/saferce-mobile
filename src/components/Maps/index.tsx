@@ -28,6 +28,8 @@ interface MarkerProps {
   id: number;
   title: string;
   description: string;
+  image: string;
+  category: string;
   geometry: GeometryProps;
 }
 
@@ -65,7 +67,12 @@ const Maps: React.FC<MapsProps> = ({ placeSelected }) => {
         <Marker key={String(marker.id)} coordinate={marker.geometry}>
           <ProviderMarker provider={marker} />
 
-          <Callout>
+          <Callout
+            tooltip
+            style={{
+              padding: 5,
+            }}
+          >
             <ProviderCallout provider={marker} />
           </Callout>
         </Marker>

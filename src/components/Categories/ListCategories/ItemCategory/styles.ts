@@ -1,14 +1,14 @@
 import styled from 'styled-components/native';
 
 export const Container = styled.View`
-  height: 180px;
-  width: 130px;
+  height: 140px;
+  width: 160px;
   margin-right: 20px;
 `;
 
 export const CategoryImage = styled.ImageBackground`
   flex: 1;
-  border-radius: 5px;
+  border-radius: 18px;
   overflow: hidden;
   background-color: #fff;
 `;

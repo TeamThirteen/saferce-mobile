@@ -1,5 +1,6 @@
 import React from 'react';
-import { Container, ProviderImage } from './styles';
+import Icon from 'react-native-vector-icons/Feather';
+import { Container, MarkerIcon } from './styles';
 
 interface MarkerProps {
   image: string;
@@ -9,20 +10,12 @@ interface ProviderProps {
   provider: MarkerProps;
 }
 
-const ProviderMarker: React.FC<ProviderProps> = ({ provider }) => {
+const ProviderMarker: React.FC<ProviderProps> = () => {
   return (
     <Container>
-      <ProviderImage
-        style={{
-          shadowColor: '#000',
-          shadowOffset: { width: 0, height: 2 },
-          shadowOpacity: 0.2,
-
-          elevation: 5,
-          position: 'relative',
-        }}
-        source={{ uri: provider.image }}
-      />
+      <MarkerIcon>
+        <Icon name="map-pin" size={18} color="#FFFFFF" />
+      </MarkerIcon>
     </Container>
   );
 };

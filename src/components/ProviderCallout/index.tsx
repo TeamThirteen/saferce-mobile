@@ -1,11 +1,20 @@
 import React from 'react';
-import { Container, ProviderTitle, ProviderCategory } from './styles';
+import { Text } from 'react-native';
+
+import {
+  Container,
+  ProviderTitle,
+  ProviderCategory,
+  ProviderInfo,
+  ProviderImage,
+} from './styles';
 
 interface CalloutProps {
   id: number;
   title: string;
   description: string;
   category: string;
+  image: string;
 }
 
 interface ProviderProps {
@@ -16,17 +25,18 @@ const ProviderCallout: React.FC<ProviderProps> = ({ provider }) => {
   return (
     <Container
       style={{
-        shadowColor: '#000000',
-        shadowOpacity: 0.8,
-        shadowRadius: 4,
-        shadowOffset: {
-          height: 2,
-          width: 0,
-        },
+        shadowColor: '#000',
+        shadowOpacity: 0.1,
+        shadowOffset: { width: 0, height: 0 },
+        shadowRadius: 15,
+        elevation: 5,
       }}
     >
-      <ProviderTitle>{provider.title}</ProviderTitle>
-      <ProviderCategory>{provider.category}</ProviderCategory>
+      <ProviderImage source={{ uri: provider.image }} />
+      <ProviderInfo>
+        <ProviderTitle>{provider.title}</ProviderTitle>
+        <ProviderCategory>{provider.category}</ProviderCategory>
+      </ProviderInfo>
     </Container>
   );
 };
