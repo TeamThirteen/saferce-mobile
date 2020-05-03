@@ -40,14 +40,15 @@ export const ProviderInfo = styled.View`
 `;
 
 export const ProviderName = styled.Text`
-  font-size: 23px;
+  font-size: 21px;
   font-family: 'Poppins-Medium';
 `;
 
 export const ProviderCategory = styled.Text`
-  font-size: 18px;
+  font-size: 16px;
   font-family: 'Poppins-Regular';
   color: ${Theme.color.selected};
+  margin-top: -4px;
 `;
 
 export const ProviderItemsSafe = styled(FlatList)``;

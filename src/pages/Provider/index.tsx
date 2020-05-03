@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from 'react';
+import { Text } from 'react-native';
+
 import { RouteProp } from '@react-navigation/native';
 
 import api from '../../services/api';
 
 import ItemSafe from '../../components/ItemSafe';
+import RatingSafe from '../../components/RatingSafe';
 
 import {
   Container,
@@ -32,6 +35,7 @@ interface ItemSafeProps {
 interface ProviderProps {
   title: string;
   items: ItemSafeProps[];
+  rating: number;
   category: {
     id: number;
     name: string;
@@ -67,7 +71,9 @@ const Provider: React.FC<Props> = ({ route }) => {
                   'rgba(0, 0, 0, 0.3)',
                   'rgba(0, 0, 0, 0.8)',
                 ]}
-              />
+              >
+                <RatingSafe rating={provider.rating} />
+              </ProviderImageGradient>
             </ProviderImage>
           </ProviderWrapperImage>
           <ProviderInfo>
@@ -85,7 +91,9 @@ const Provider: React.FC<Props> = ({ route }) => {
           </ProviderInfo>
         </ProviderWrapper>
       ) : (
-        <ProviderInfo />
+        <ProviderInfo>
+          <Text>Carregando...</Text>
+        </ProviderInfo>
       )}
     </Container>
   );

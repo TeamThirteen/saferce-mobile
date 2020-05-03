@@ -35,6 +35,7 @@
     {
       "id": 1,
       "title": "Diego Souza",
+      "rating": 4,
       "category": {
         "id": 1,
         "name": "Artesanato",
