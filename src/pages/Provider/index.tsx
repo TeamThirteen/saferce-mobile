@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { Text } from 'react-native';
+import { Text, Linking, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 
 import { RouteProp } from '@react-navigation/native';
 
+import axios from 'axios';
 import api from '../../services/api';
 
 import ItemSafe from '../../components/ItemSafe';
@@ -21,6 +22,7 @@ import {
   ProviderCategory,
   ProviderItemsSafe,
   InformationTitle,
+  Hr,
 } from './styles';
 
 type RootStackParamList = {
@@ -43,6 +45,9 @@ interface ProviderProps {
   district: string;
   number: string;
   location: string;
+  whatsapp: string;
+  phone: string;
+  site_url: string;
   category: {
     id: number;
     name: string;
@@ -62,6 +67,18 @@ const Provider: React.FC<Props> = ({ route }) => {
 
     loadDetailsProvider();
   }, [id]);
+
+  function doCall(phone: string): void {
+    Linking.openURL(`tel:${phone}`);
+  }
+
+  async function sendMessage(wpp: string): Promise<void> {
+    await axios.get(`https://api.whatsapp.com/send?phone=${wpp}`);
+  }
+
+  function openSite(siteUrl: string): void {
+    Linking.openURL(siteUrl);
+  }
 
   return (
     <Container>
@@ -91,7 +108,7 @@ const Provider: React.FC<Props> = ({ route }) => {
             </ProviderCategory>
 
             <ProviderItemsSafe
-              data={provider.items}
+              data={provider.safe_items}
               horizontal
               renderItem={({ item }) => <ItemSafe item={item} />}
               keyExtractor={(item) => item.title}
@@ -104,6 +121,31 @@ const Provider: React.FC<Props> = ({ route }) => {
             />
             <InformationProvider text="Bairro" value={provider.district} />
             <InformationProvider text="Localidade" value={provider.location} />
+
+            <Hr />
+
+            <InformationTitle>Contato</InformationTitle>
+            <TouchableOpacity onPress={() => sendMessage(provider.whatsapp)}>
+              <InformationProvider
+                text="WhatsApp"
+                value={provider.whatsapp}
+                icon="whatsapp"
+              />
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => doCall(provider.phone)}>
+              <InformationProvider
+                text="Telefone"
+                value={provider.phone}
+                icon="phone"
+              />
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => openSite(provider.site_url)}>
+              <InformationProvider
+                text="Site"
+                value={provider.site_url}
+                icon="desktop"
+              />
+            </TouchableOpacity>
           </ProviderInfo>
         </ProviderWrapper>
       ) : (
