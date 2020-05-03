@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import { TouchableOpacity } from 'react-native';
+import React, { useEffect, useState, useCallback } from 'react';
 import MapView, { Marker, Callout } from 'react-native-maps';
+import { useNavigation } from '@react-navigation/native';
 
 import { MapStyle } from '../../assets/MapStyle';
 
@@ -25,17 +25,24 @@ interface GeometryProps {
   longitude: number;
 }
 
+interface CategoryProps {
+  id: number;
+  name: string;
+  image: string;
+}
+
 interface MarkerProps {
   id: number;
   title: string;
   description: string;
   image: string;
-  category: string;
+  category: CategoryProps;
   geometry: GeometryProps;
 }
 
 const Maps: React.FC<MapsProps> = ({ placeSelected }) => {
   const [markers, setMarkers] = useState<MarkerProps[]>([]);
+  const navigation = useNavigation();
 
   useEffect(() => {
     async function loadMarkersMap(): Promise<void> {
@@ -50,6 +57,15 @@ const Maps: React.FC<MapsProps> = ({ placeSelected }) => {
 
     loadMarkersMap();
   }, []);
+
+  const handleCalloutProvider = useCallback(
+    (id: number): void => {
+      navigation.navigate('Provider', {
+        id,
+      });
+    },
+    [navigation],
+  );
 
   return (
     <MapView
@@ -68,7 +84,7 @@ const Maps: React.FC<MapsProps> = ({ placeSelected }) => {
         <Marker key={String(marker.id)} coordinate={marker.geometry}>
           <ProviderMarker provider={marker} />
 
-          <Callout tooltip onPress={() => console.log('Teste')}>
+          <Callout tooltip onPress={() => handleCalloutProvider(marker.id)}>
             <ProviderCallout provider={marker} />
           </Callout>
         </Marker>

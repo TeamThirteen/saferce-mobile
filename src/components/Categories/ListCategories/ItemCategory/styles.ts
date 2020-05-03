@@ -21,4 +21,5 @@ export const CategoryTitle = styled.Text`
 
 export const CategorySubTitle = styled.Text`
   color: #f7f7f7;
+  font-family: 'Poppins-Regular';
 `;

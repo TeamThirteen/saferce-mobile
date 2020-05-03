@@ -12,7 +12,9 @@ interface CalloutProps {
   id: number;
   title: string;
   description: string;
-  category: string;
+  category: {
+    name: string;
+  };
   image: string;
 }
 
@@ -35,7 +37,7 @@ const ProviderCallout: React.FC<ProviderProps> = ({ provider }) => {
       <ProviderImage source={{ uri: provider.image }} />
       <ProviderInfo>
         <ProviderTitle>{provider.title}</ProviderTitle>
-        <ProviderCategory>{provider.category}</ProviderCategory>
+        <ProviderCategory>{provider.category.name}</ProviderCategory>
       </ProviderInfo>
     </Container>
   );

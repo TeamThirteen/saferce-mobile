@@ -2,6 +2,7 @@ import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 
 import Main from '../pages/Main';
+import Provider from '../pages/Provider';
 
 import Theme from '../theme';
 
@@ -17,6 +18,7 @@ const AppRoutes: React.FC = () => (
     }}
   >
     <App.Screen name="Main" component={Main} />
+    <App.Screen name="Provider" component={Provider} />
   </App.Navigator>
 );
 
