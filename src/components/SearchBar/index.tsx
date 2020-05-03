@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Platform } from 'react-native';
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 
@@ -16,6 +16,8 @@ const SearchBar: React.FC<SearchBarProps> = ({
   onLocationSelect,
   onShowCategoriesFilter,
 }) => {
+  const [isFocused, setIsFocused] = useState(false);
+
   return (
     <GooglePlacesAutocomplete
       placeholder="Onde você está..."
@@ -29,9 +31,16 @@ const SearchBar: React.FC<SearchBarProps> = ({
       )}
       renderRightButton={() => <Profile />}
       textInputProps={{
+        onFocus: () => {
+          setIsFocused(true);
+        },
+        onBlur: () => {
+          setIsFocused(false);
+        },
         autoCapitalize: 'none',
         autoCorrect: false,
       }}
+      listViewDisplayed={isFocused}
       onPress={onLocationSelect}
       query={{
         key: 'AIzaSyDNHHDNMnMlnqRt7QdmmVGjKcRBE2QD-78',

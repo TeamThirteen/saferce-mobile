@@ -6,7 +6,8 @@ export const Container = styled.View`
   height: 40px;
   background-color: #ffffff;
   border-radius: 20px;
-  border-width: 1px;
+  border-width: 0.5px;
+  padding: 1px;
   border-color: ${Theme.color.selected};
   flex: 1;
 `;

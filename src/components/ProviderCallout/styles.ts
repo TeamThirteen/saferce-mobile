@@ -1,22 +1,23 @@
 import styled from 'styled-components/native';
 import Theme from '../../theme';
 
-export const Container = styled.View`
+export const Container = styled.TouchableOpacity`
   width: 260px;
   height: 80px;
   background-color: #ffffff;
   border-radius: 15px;
   justify-content: flex-start;
+  border-width: 2px;
+  border-color: #d7d7d7;
   align-items: center;
   flex-direction: row;
   flex: 1;
-  overflow: hidden;
   padding: 0px 20px;
 `;
 
 export const ProviderImage = styled.ImageBackground`
-  width: 65px;
-  height: 65px;
+  width: 55px;
+  height: 55px;
   border-radius: 35px;
   background-color: ${Theme.color.secondary};
 `;

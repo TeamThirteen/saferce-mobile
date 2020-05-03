@@ -1,6 +1,5 @@
 import Geolocation, {
   GeolocationResponse,
-  GeolocationError,
 } from '@react-native-community/geolocation';
 
 Geolocation.setRNConfiguration({

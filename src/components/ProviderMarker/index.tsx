@@ -14,7 +14,7 @@ const ProviderMarker: React.FC<ProviderProps> = () => {
   return (
     <Container>
       <MarkerIcon>
-        <Icon name="map-pin" size={18} color="#FFFFFF" />
+        <Icon name="map-pin" size={16} color="#FFFFFF" />
       </MarkerIcon>
     </Container>
   );

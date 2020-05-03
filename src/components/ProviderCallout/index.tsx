@@ -1,5 +1,4 @@
 import React from 'react';
-import { Text } from 'react-native';
 
 import {
   Container,
@@ -24,10 +23,11 @@ interface ProviderProps {
 const ProviderCallout: React.FC<ProviderProps> = ({ provider }) => {
   return (
     <Container
+      activeOpacity={1}
       style={{
         shadowColor: '#000',
         shadowOpacity: 0.1,
-        shadowOffset: { width: 0, height: 0 },
+        shadowOffset: { width: 2, height: 2 },
         shadowRadius: 15,
         elevation: 5,
       }}

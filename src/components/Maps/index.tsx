@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { TouchableOpacity } from 'react-native';
 import MapView, { Marker, Callout } from 'react-native-maps';
 
 import { MapStyle } from '../../assets/MapStyle';
@@ -67,12 +68,7 @@ const Maps: React.FC<MapsProps> = ({ placeSelected }) => {
         <Marker key={String(marker.id)} coordinate={marker.geometry}>
           <ProviderMarker provider={marker} />
 
-          <Callout
-            tooltip
-            style={{
-              padding: 5,
-            }}
-          >
+          <Callout tooltip onPress={() => console.log('Teste')}>
             <ProviderCallout provider={marker} />
           </Callout>
         </Marker>
