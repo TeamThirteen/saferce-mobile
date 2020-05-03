@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Text } from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome5';
 
 import { RouteProp } from '@react-navigation/native';
 
@@ -7,6 +8,7 @@ import api from '../../services/api';
 
 import ItemSafe from '../../components/ItemSafe';
 import RatingSafe from '../../components/RatingSafe';
+import InformationProvider from '../../components/InformationProvider';
 
 import {
   Container,
@@ -18,6 +20,7 @@ import {
   ProviderName,
   ProviderCategory,
   ProviderItemsSafe,
+  InformationTitle,
 } from './styles';
 
 type RootStackParamList = {
@@ -36,6 +39,10 @@ interface ProviderProps {
   title: string;
   items: ItemSafeProps[];
   rating: number;
+  address: string;
+  district: string;
+  number: string;
+  location: string;
   category: {
     id: number;
     name: string;
@@ -76,6 +83,7 @@ const Provider: React.FC<Props> = ({ route }) => {
               </ProviderImageGradient>
             </ProviderImage>
           </ProviderWrapperImage>
+
           <ProviderInfo>
             <ProviderName>{provider.title}</ProviderName>
             <ProviderCategory>
@@ -88,6 +96,14 @@ const Provider: React.FC<Props> = ({ route }) => {
               renderItem={({ item }) => <ItemSafe item={item} />}
               keyExtractor={(item) => item.title}
             />
+
+            <InformationTitle>Informações</InformationTitle>
+            <InformationProvider
+              text="Endereço"
+              value={`${provider.address}, ${provider.number}`}
+            />
+            <InformationProvider text="Bairro" value={provider.district} />
+            <InformationProvider text="Localidade" value={provider.location} />
           </ProviderInfo>
         </ProviderWrapper>
       ) : (

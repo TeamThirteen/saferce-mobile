@@ -1,7 +1,7 @@
-import React, { useState, useCallback } from 'react';
+import React, { useCallback } from 'react';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 
-import { Container } from './styles';
+import { Container, SafeTitle, StarsRating } from './styles';
 
 interface RatingSafeProps {
   rating: number;
@@ -24,9 +24,15 @@ const RatingSafe: React.FC<RatingSafeProps> = ({ rating }) => {
     }
 
     return ratings;
-  }, []);
+  }, [rating]);
 
-  return <Container>{handleRating()}</Container>;
+  return (
+    <Container>
+      <StarsRating>{handleRating()}</StarsRating>
+
+      <SafeTitle>SAFES</SafeTitle>
+    </Container>
+  );
 };
 
 export default RatingSafe;

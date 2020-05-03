@@ -36,7 +36,7 @@ export const ProviderImage = styled.ImageBackground`
 `;
 
 export const ProviderInfo = styled.View`
-  padding: 30px 40px 0px;
+  padding: 30px 20px 30px;
 `;
 
 export const ProviderName = styled.Text`
@@ -52,3 +52,9 @@ export const ProviderCategory = styled.Text`
 `;
 
 export const ProviderItemsSafe = styled(FlatList)``;
+
+export const InformationTitle = styled.Text`
+  font-size: 21px;
+  font-family: 'Poppins-Medium';
+  margin-bottom: 20px;
+`;
