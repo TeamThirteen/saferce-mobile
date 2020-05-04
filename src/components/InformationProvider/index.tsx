@@ -14,18 +14,24 @@ interface InformationProps {
   text: string;
   value: string;
   icon?: string;
+  iconWhite?: boolean;
+  color?: string;
+  size?: number;
 }
 
 const InformationProvider: React.FC<InformationProps> = ({
   text,
   value,
+  color,
   icon = 'map-marker-alt',
+  iconWhite,
+  size = 22,
 }) => {
   return (
     <Container>
       <Information>
-        <InformationIcon>
-          <Icon name={icon} size={22} color="#FFF" />
+        <InformationIcon color={color}>
+          <Icon name={icon} size={size} color={iconWhite ? '#FFF' : '#999'} />
         </InformationIcon>
         <InformationDescription>
           <InformationText>{text}</InformationText>

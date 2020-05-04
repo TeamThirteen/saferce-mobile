@@ -5,9 +5,15 @@ import { Container, SafeTitle, StarsRating } from './styles';
 
 interface RatingSafeProps {
   rating: number;
+  size?: number;
+  preview?: boolean;
 }
 
-const RatingSafe: React.FC<RatingSafeProps> = ({ rating }) => {
+const RatingSafe: React.FC<RatingSafeProps> = ({
+  rating,
+  size = 25,
+  preview = false,
+}) => {
   const handleRating = useCallback(() => {
     const ratings = [];
 
@@ -17,20 +23,20 @@ const RatingSafe: React.FC<RatingSafeProps> = ({ rating }) => {
           key={String(i)}
           name="star"
           solid
-          size={25}
+          size={size}
           color={rating < i ? '#FFFFFF' : '#f6d186'}
         />,
       );
     }
 
     return ratings;
-  }, [rating]);
+  }, [rating, size]);
 
   return (
-    <Container>
+    <Container preview={preview}>
       <StarsRating>{handleRating()}</StarsRating>
 
-      <SafeTitle>SAFES</SafeTitle>
+      {!preview && <SafeTitle>SAFES</SafeTitle>}
     </Container>
   );
 };

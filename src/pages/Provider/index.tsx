@@ -131,38 +131,35 @@ const Provider: React.FC<Props> = ({ route }) => {
             <Separator />
 
             <InformationTitle>Contato</InformationTitle>
-
-            {provider.whatsapp && (
-              <TouchableOpacity onPress={() => sendMessage(provider.whatsapp)}>
-                <InformationProvider
-                  text="WhatsApp"
-                  value={provider.whatsapp}
-                  icon="whatsapp"
-                />
-              </TouchableOpacity>
-            )}
-
-            {provider.phone && (
-              <TouchableOpacity onPress={() => doCall(provider.phone)}>
-                <InformationProvider
-                  text="Telefone"
-                  value={provider.phone}
-                  icon="phone"
-                />
-              </TouchableOpacity>
-            )}
-
-            {provider.url_page_promotion && (
-              <TouchableOpacity
-                onPress={() => openSite(provider.url_page_promotion)}
-              >
-                <InformationProvider
-                  text="Site"
-                  value={provider.url_page_promotion}
-                  icon="desktop"
-                />
-              </TouchableOpacity>
-            )}
+            <TouchableOpacity onPress={() => sendMessage(provider.whatsapp)}>
+              <InformationProvider
+                text="WhatsApp"
+                value={provider.whatsapp}
+                icon="whatsapp"
+                iconWhite
+                color="#25d366"
+                size={30}
+              />
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => doCall(provider.phone)}>
+              <InformationProvider
+                text="Telefone"
+                value={provider.phone}
+                icon="phone"
+                iconWhite
+                color="#34b7f1"
+                size={22}
+              />
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => openSite(provider.site_url)}>
+              <InformationProvider
+                text="Site"
+                value={provider.site_url}
+                color="#f5b971"
+                icon="desktop"
+                iconWhite
+              />
+            </TouchableOpacity>
           </ProviderInfo>
         </ProviderWrapper>
       ) : (
