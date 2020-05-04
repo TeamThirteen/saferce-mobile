@@ -106,7 +106,7 @@ const Provider: React.FC<Props> = ({ route }) => {
   }, []);
 
   const sendMessage = useCallback(async (wpp: string) => {
-    await axios.get(`https://api.whatsapp.com/send?phone=${wpp}`);
+    Linking.openURL(`whatsapp://send?text=Oi&phone=55${wpp}`);
   }, []);
 
   const openSite = useCallback((siteUrl: string) => {

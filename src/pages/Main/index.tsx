@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-
+import { Alert } from 'react-native';
 import Maps from '../../components/Maps';
 import SearchBar from '../../components/SearchBar';
 import ListCategories from '../../components/Categories/ListCategories';
@@ -21,8 +21,8 @@ const Main: React.FC = () => {
   const { token } = useAuth();
 
   const [userLocation, setUserLocation] = useState({
-    latitude: 37.78825,
-    longitude: -122.4324,
+    latitude: -22.736997,
+    longitude: -47.647893,
     latitudeDelta: 0.04,
     longitudeDelta: 0.05,
   });
@@ -34,19 +34,23 @@ const Main: React.FC = () => {
   useEffect(() => {
     async function loadUserLocation(): Promise<void> {
       try {
-        const {
-          coords: { latitude, longitude },
-        } = await Geolocation();
+        const position = await Geolocation();
 
-        const coords = {
-          latitude,
-          longitude,
+        const coordinates = {
+          latitude: position.coords.latitude,
+          longitude: position.coords.longitude,
           latitudeDelta: 0.04,
           longitudeDelta: 0.05,
         };
 
-        setUserLocation(coords);
+        setUserLocation(coordinates);
+      } catch (error) {
+        Alert.alert('Permissão Negada para Localização');
+      }
+    }
 
+    async function loadCategories(): Promise<void> {
+      try {
         const response = await api.get<CategoriesProps[]>('categories', {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -60,6 +64,7 @@ const Main: React.FC = () => {
     }
 
     loadUserLocation();
+    loadCategories();
   }, [token]);
 
   const handleLocationMap = useCallback((data, { geometry }) => {

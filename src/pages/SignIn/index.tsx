@@ -1,4 +1,4 @@
-import React, { useCallback, useRef } from 'react';
+import React, { useState, useCallback, useRef } from 'react';
 import {
   View,
   KeyboardAvoidingView,
@@ -44,10 +44,12 @@ const SignIn: React.FC = () => {
   const navigation = useNavigation();
   const formRef = useRef<FormHandles>(null);
   const passwordInputRef = useRef<TextInput>(null);
+  const [loading, setLoading] = useState(false);
 
   const handleSignIn = useCallback(
     async (data: SignInFormData) => {
       try {
+        setLoading(true);
         formRef.current?.setErrors({});
 
         const schema = Yup.object().shape({
@@ -77,6 +79,8 @@ const SignIn: React.FC = () => {
           'Erro na Autenticação',
           'Ocorreu um erro ao fazer login. Verifique as credenciais.',
         );
+      } finally {
+        setLoading(false);
       }
     },
     [signIn],
@@ -129,7 +133,10 @@ const SignIn: React.FC = () => {
                 <ForgotPasswordText>ESQUECI A SENHA</ForgotPasswordText>
               </ForgotPassword>
 
-              <Button onPress={() => formRef.current?.submitForm()}>
+              <Button
+                onPress={() => formRef.current?.submitForm()}
+                loading={loading}
+              >
                 ACESSAR
               </Button>
             </Form>
