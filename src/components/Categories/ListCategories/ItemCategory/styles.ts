@@ -15,11 +15,11 @@ export const CategoryImage = styled.ImageBackground`
 
 export const CategoryTitle = styled.Text`
   color: #000;
-  font-family: 'Poppins-Bold';
+  font-family: 'RobotoSlab-Bold';
   margin-top: 6px;
 `;
 
 export const CategorySubTitle = styled.Text`
   color: #f7f7f7;
-  font-family: 'Poppins-Regular';
+  font-family: 'RobotoSlab-Regular';
 `;

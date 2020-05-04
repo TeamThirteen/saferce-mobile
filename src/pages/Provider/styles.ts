@@ -41,12 +41,12 @@ export const ProviderInfo = styled.View`
 
 export const ProviderName = styled.Text`
   font-size: 21px;
-  font-family: 'Poppins-Medium';
+  font-family: 'RobotoSlab-Medium';
 `;
 
 export const ProviderCategory = styled.Text`
   font-size: 16px;
-  font-family: 'Poppins-Regular';
+  font-family: 'RobotoSlab-Regular';
   color: ${Theme.color.selected};
   margin-top: -4px;
 `;
@@ -55,12 +55,19 @@ export const ProviderItemsSafe = styled(FlatList)``;
 
 export const InformationTitle = styled.Text`
   font-size: 21px;
-  font-family: 'Poppins-Medium';
+  font-family: 'RobotoSlab-Medium';
   margin-bottom: 20px;
 `;
 
-export const Hr = styled.View`
+export const Separator = styled.View`
   border-bottom-width: 2px;
   border-bottom-color: #ccc;
   margin: 20px 0 20px 0;
+`;
+
+export const ButtonBack = styled.TouchableOpacity`
+  position: absolute;
+  background-color: transparent;
+  left: 20px;
+  top: 20px;
 `;

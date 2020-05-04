@@ -5,7 +5,7 @@ import LinearGradient from 'react-native-linear-gradient';
 export const Container = styled(LinearGradient)`
   position: absolute;
   width: 100%;
-  height: 200px;
+  height: 210px;
   background: transparent;
   bottom: 0px;
   left: 0;
@@ -14,15 +14,15 @@ export const Container = styled(LinearGradient)`
 
 export const FlatListCategories = styled(FlatList)`
   padding: 0px 10px;
+  margin-top: 15px;
 `;
 
 export const FilterTitle = styled.View`
   padding: 0px 10px;
-  margin-bottom: 5px;
 `;
 
 export const FilterTitleText = styled.Text`
   font-size: 25px;
   color: #888888;
-  font-family: 'Poppins-Medium';
+  font-family: 'RobotoSlab-Medium';
 `;

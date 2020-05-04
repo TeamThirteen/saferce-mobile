@@ -32,12 +32,12 @@ export const InformationIcon = styled.View<InformationProps>`
 
 export const InformationText = styled.Text`
   font-size: 13px;
-  font-family: 'Poppins-Medium';
+  font-family: 'RobotoSlab-Medium';
 `;
 
 export const InformationValue = styled.Text`
   font-size: 16px;
   margin-top: -3px;
-  font-family: 'Poppins-Regular';
+  font-family: 'RobotoSlab-Regular';
   color: #666666;
 `;

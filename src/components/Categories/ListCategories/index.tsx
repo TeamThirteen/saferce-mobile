@@ -29,6 +29,7 @@ const ListCategories: React.FC<ListCategoriesProps> = ({ categories }) => {
       <FilterTitle>
         <FilterTitleText>Categorias</FilterTitleText>
       </FilterTitle>
+
       {categories && (
         <FlatListCategories
           data={categories}

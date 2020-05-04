@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Text, Linking, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 
-import { RouteProp } from '@react-navigation/native';
+import { RouteProp, useNavigation } from '@react-navigation/native';
 
 import axios from 'axios';
 import api from '../../services/api';
@@ -22,7 +22,8 @@ import {
   ProviderCategory,
   ProviderItemsSafe,
   InformationTitle,
-  Hr,
+  Separator,
+  ButtonBack,
 } from './styles';
 
 type RootStackParamList = {
@@ -47,15 +48,17 @@ interface ProviderProps {
   location: string;
   whatsapp: string;
   phone: string;
-  site_url: string;
+  url_page_promotion: string;
   category: {
     id: number;
     name: string;
     image: string;
   };
+  safe_items: object;
 }
 
 const Provider: React.FC<Props> = ({ route }) => {
+  const navigate = useNavigation();
   const { id } = route.params;
   const [provider, setProvider] = useState({} as ProviderProps);
 
@@ -96,6 +99,9 @@ const Provider: React.FC<Props> = ({ route }) => {
                   'rgba(0, 0, 0, 0.8)',
                 ]}
               >
+                <ButtonBack onPress={() => navigate.goBack()}>
+                  <Icon name="arrow-left" size={18} color="#FFFFFF" />
+                </ButtonBack>
                 <RatingSafe rating={provider.rating} />
               </ProviderImageGradient>
             </ProviderImage>
@@ -122,7 +128,7 @@ const Provider: React.FC<Props> = ({ route }) => {
             <InformationProvider text="Bairro" value={provider.district} />
             <InformationProvider text="Localidade" value={provider.location} />
 
-            <Hr />
+            <Separator />
 
             <InformationTitle>Contato</InformationTitle>
             <TouchableOpacity onPress={() => sendMessage(provider.whatsapp)}>

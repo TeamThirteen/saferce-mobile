@@ -23,7 +23,7 @@ export const StarsRating = styled.View`
 `;
 
 export const SafeTitle = styled.Text`
-  font-family: 'Poppins-Regular';
+  font-family: 'RobotoSlab-Regular';
   font-size: 18px;
   color: #ffffff;
   margin-top: 5px;

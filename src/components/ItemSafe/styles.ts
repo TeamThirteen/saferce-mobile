@@ -21,7 +21,7 @@ export const ItemImage = styled.View<ItemImageProps>`
 
 export const ItemTitle = styled.Text`
   width: 70px;
-  font-family: 'Poppins-Medium';
+  font-family: 'RobotoSlab-Medium';
   font-size: 13px;
   margin-top: 5px;
 `;

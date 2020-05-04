@@ -42,7 +42,7 @@
       "location": "Piracicaba, SP",
       "whatsapp": "5519987526315",
       "phone": "5519987526315",
-      "site_url": "https://www.typescriptlang.org/",
+      "url_page_promotion": "https://www.typescriptlang.org/",
       "category": {
         "id": 1,
         "name": "Artesanato",
@@ -101,6 +101,9 @@
       "number": 40,
       "district": "Parque Piracicaba",
       "location": "Piracicaba, SP",
+      "whatsapp": "5519987526315",
+      "phone": "5519987526315",
+      "url_page_promotion": "https://www.typescriptlang.org/",
       "category": {
         "id": 1,
         "name": "Artesanato",
@@ -112,7 +115,7 @@
         "latitude": -22.737761,
         "longitude": -47.649819
       },
-      "items": [
+      "safe_items": [
         {
           "id": 1,
           "title": "Máscara",

@@ -7,6 +7,7 @@ const Theme = {
     danger: '#ef6a6a',
     warning: '#efa26a',
     selected: '#A7A7A7',
+    pink: '#ff225c',
   },
 };
 
