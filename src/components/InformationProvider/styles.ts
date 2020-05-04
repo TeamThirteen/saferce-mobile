@@ -1,5 +1,9 @@
 import styled from 'styled-components/native';
 
+interface InformationProps {
+  color?: string;
+}
+
 export const Container = styled.View`
   flex: 1;
 `;
@@ -17,10 +21,10 @@ export const InformationDescription = styled.View`
   margin-left: 10px;
 `;
 
-export const InformationIcon = styled.View`
+export const InformationIcon = styled.View<InformationProps>`
   width: 50px;
   height: 50px;
-  background-color: #c7c7c7;
+  background-color: ${(props) => props.color ?? '#c7c7c7'};
   border-radius: 15px;
   justify-content: center;
   align-items: center;

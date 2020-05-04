@@ -1,9 +1,21 @@
-import styled from 'styled-components/native';
+import styled, { css } from 'styled-components/native';
 
-export const Container = styled.View`
+interface ContainerProps {
+  preview: boolean;
+}
+
+export const Container = styled.View<ContainerProps>`
   position: absolute;
-  bottom: 10px;
-  left: 20px;
+  ${(props) =>
+    !props.preview
+      ? css`
+          bottom: 10px;
+          left: 20px;
+        `
+      : css`
+          top: 10px;
+          right: 10px;
+        `}
 `;
 
 export const StarsRating = styled.View`

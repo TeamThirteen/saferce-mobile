@@ -1,5 +1,7 @@
 import React from 'react';
 
+import RatingSafe from '../RatingSafe';
+
 import {
   Container,
   ProviderTitle,
@@ -16,6 +18,7 @@ interface CalloutProps {
     name: string;
   };
   image: string;
+  rating: number;
 }
 
 interface ProviderProps {
@@ -39,6 +42,7 @@ const ProviderCallout: React.FC<ProviderProps> = ({ provider }) => {
         <ProviderTitle>{provider.title}</ProviderTitle>
         <ProviderCategory>{provider.category.name}</ProviderCategory>
       </ProviderInfo>
+      <RatingSafe rating={provider.rating} size={9} preview />
     </Container>
   );
 };

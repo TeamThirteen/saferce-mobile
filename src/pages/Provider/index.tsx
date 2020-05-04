@@ -130,6 +130,9 @@ const Provider: React.FC<Props> = ({ route }) => {
                 text="WhatsApp"
                 value={provider.whatsapp}
                 icon="whatsapp"
+                iconWhite
+                color="#25d366"
+                size={30}
               />
             </TouchableOpacity>
             <TouchableOpacity onPress={() => doCall(provider.phone)}>
@@ -137,13 +140,18 @@ const Provider: React.FC<Props> = ({ route }) => {
                 text="Telefone"
                 value={provider.phone}
                 icon="phone"
+                iconWhite
+                color="#34b7f1"
+                size={22}
               />
             </TouchableOpacity>
             <TouchableOpacity onPress={() => openSite(provider.site_url)}>
               <InformationProvider
                 text="Site"
                 value={provider.site_url}
+                color="#f5b971"
                 icon="desktop"
+                iconWhite
               />
             </TouchableOpacity>
           </ProviderInfo>
