@@ -59,8 +59,15 @@ export const InformationTitle = styled.Text`
   margin-bottom: 20px;
 `;
 
-export const Hr = styled.View`
+export const Separator = styled.View`
   border-bottom-width: 2px;
   border-bottom-color: #ccc;
   margin: 20px 0 20px 0;
+`;
+
+export const ButtonBack = styled.TouchableOpacity`
+  position: absolute;
+  background-color: transparent;
+  left: 20px;
+  top: 20px;
 `;

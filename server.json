@@ -42,7 +42,7 @@
       "location": "Piracicaba, SP",
       "whatsapp": "5519987526315",
       "phone": "5519987526315",
-      "site_url": "https://www.typescriptlang.org/",
+      "url_page_promotion": "https://www.typescriptlang.org/",
       "category": {
         "id": 1,
         "name": "Artesanato",
@@ -103,7 +103,7 @@
       "location": "Piracicaba, SP",
       "whatsapp": "5519987526315",
       "phone": "5519987526315",
-      "site_url": "https://www.typescriptlang.org/",
+      "url_page_promotion": "https://www.typescriptlang.org/",
       "category": {
         "id": 1,
         "name": "Artesanato",
