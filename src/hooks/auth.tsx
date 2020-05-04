@@ -18,6 +18,7 @@ interface AuthContextData {
   loading: boolean;
   signIn(credentials: SignInCredentials): Promise<void>;
   signOut(): void;
+  token: string;
 }
 
 interface ResponseData {
@@ -39,8 +40,8 @@ const AuthProvider: React.FC = ({ children }) => {
   useEffect(() => {
     async function loadStorageData(): Promise<void> {
       const [token, user] = await AsyncStorage.multiGet([
-        '@GoBarber:token',
-        '@GoBarber:user',
+        '@SaferCe:token',
+        '@SaferCe:user',
       ]);
 
       if (token[1] && user[1]) {
@@ -62,21 +63,23 @@ const AuthProvider: React.FC = ({ children }) => {
     const { user, token } = response.data;
 
     await AsyncStorage.multiSet([
-      ['@GoBarber:token', token],
-      ['@GoBarber:user', JSON.stringify(user)],
+      ['@SaferCe:token', token],
+      ['@SaferCe:user', JSON.stringify(user)],
     ]);
 
     setData({ token, user });
   }, []);
 
   const signOut = useCallback(async () => {
-    await AsyncStorage.multiRemove(['@GoBarber:user', '@GoBarber:token']);
+    await AsyncStorage.multiRemove(['@SaferCe:user', '@SaferCe:token']);
 
     setData({} as AuthState);
   }, []);
 
   return (
-    <AuthContext.Provider value={{ user: data.user, loading, signIn, signOut }}>
+    <AuthContext.Provider
+      value={{ user: data.user, loading, signIn, signOut, token: data.token }}
+    >
       {children}
     </AuthContext.Provider>
   );

@@ -11,15 +11,19 @@ import ItemCategory from './ItemCategory';
 
 interface CategoriesProps {
   id: number;
-  title: string;
-  image: string;
+  description: string;
+  image_url: string;
 }
 
 interface ListCategoriesProps {
   categories: CategoriesProps[];
+  handleProviderByCategory(categoryId: number): void;
 }
 
-const ListCategories: React.FC<ListCategoriesProps> = ({ categories }) => {
+const ListCategories: React.FC<ListCategoriesProps> = ({
+  categories,
+  handleProviderByCategory,
+}) => {
   return (
     <Container
       colors={['transparent', '#FFFFFF', '#FFFFFF', '#FFFFFF']}
@@ -34,8 +38,13 @@ const ListCategories: React.FC<ListCategoriesProps> = ({ categories }) => {
         <FlatListCategories
           data={categories}
           horizontal
-          renderItem={({ item }) => <ItemCategory category={item} />}
-          keyExtractor={(item) => item.title}
+          renderItem={({ item }) => (
+            <ItemCategory
+              handleProviderByCategory={handleProviderByCategory}
+              category={item}
+            />
+          )}
+          keyExtractor={(item) => String(item.id)}
         />
       )}
     </Container>

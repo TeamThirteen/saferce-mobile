@@ -4,7 +4,7 @@ import { Container, ItemImage, ItemTitle } from './styles';
 
 interface ItemSafeProps {
   id: number;
-  title: string;
+  description: string;
   icon: string;
   color: string;
 }
@@ -19,7 +19,7 @@ const ItemSafe: React.FC<ItemProps> = ({ item }) => {
       <ItemImage color={item.color}>
         <Icon name={item.icon} color="#FFFFFF" size={25} />
       </ItemImage>
-      <ItemTitle>{item.title}</ItemTitle>
+      <ItemTitle>{item.description}</ItemTitle>
     </Container>
   );
 };

@@ -4,19 +4,23 @@ import { Container, CategoryImage, CategoryTitle } from './styles';
 
 interface CategoryProps {
   id: number;
-  title: string;
-  image: string;
+  description: string;
+  image_url: string;
 }
 
 interface ItemCategoryProps {
   category: CategoryProps;
+  handleProviderByCategory(categoryId: number): void;
 }
 
-const ItemCategory: React.FC<ItemCategoryProps> = ({ category }) => {
+const ItemCategory: React.FC<ItemCategoryProps> = ({
+  category,
+  handleProviderByCategory,
+}) => {
   return (
-    <Container>
+    <Container onPress={() => handleProviderByCategory(category.id)}>
       <CategoryImage
-        source={{ uri: category.image }}
+        source={{ uri: category.image_url }}
         style={{
           shadowColor: '#000',
           shadowOpacity: 0.1,
@@ -25,7 +29,7 @@ const ItemCategory: React.FC<ItemCategoryProps> = ({ category }) => {
           elevation: 5,
         }}
       />
-      <CategoryTitle>{category.title}</CategoryTitle>
+      <CategoryTitle>{category.description}</CategoryTitle>
     </Container>
   );
 };

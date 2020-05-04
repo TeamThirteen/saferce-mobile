@@ -2,28 +2,29 @@ import styled from 'styled-components/native';
 import Theme from '../../theme';
 
 export const Container = styled.TouchableOpacity`
-  width: 220px;
+  width: 260px;
   height: 80px;
   background-color: #ffffff;
-  border-radius: 15px;
   justify-content: flex-start;
   border-width: 2px;
-  border-color: #d7d7d7;
+  border-color: #e7e7e7;
   align-items: center;
   flex-direction: row;
   flex: 1;
-  padding: 0px 20px;
+  padding: 0px;
+  overflow: hidden;
 `;
 
 export const ProviderImage = styled.ImageBackground`
-  width: 55px;
-  height: 55px;
-  border-radius: 35px;
+  width: 70px;
+  height: 80px;
   background-color: ${Theme.color.secondary};
 `;
 
 export const ProviderInfo = styled.View`
   margin-left: 10px;
+  overflow: hidden;
+  flex: 1;
 `;
 
 export const ProviderTitle = styled.Text`

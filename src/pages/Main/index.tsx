@@ -6,16 +6,20 @@ import ListCategories from '../../components/Categories/ListCategories';
 
 import { Container } from './styles';
 
+import { useAuth } from '../../hooks/auth';
+
 import Geolocation from '../../services/geolocation';
 import api from '../../services/api';
 
 interface CategoriesProps {
   id: number;
-  title: string;
-  image: string;
+  description: string;
+  image_url: string;
 }
 
 const Main: React.FC = () => {
+  const { token } = useAuth();
+
   const [userLocation, setUserLocation] = useState({
     latitude: 37.78825,
     longitude: -122.4324,
@@ -25,6 +29,7 @@ const Main: React.FC = () => {
 
   const [categories, setCategories] = useState([] as CategoriesProps[]);
   const [showFilterCategory, setShowFilterCategory] = useState(false);
+  const [filterCategory, setFilterCategory] = useState(null);
 
   useEffect(() => {
     async function loadUserLocation(): Promise<void> {
@@ -42,7 +47,12 @@ const Main: React.FC = () => {
 
         setUserLocation(coords);
 
-        const response = await api.get<CategoriesProps[]>('categories');
+        const response = await api.get<CategoriesProps[]>('categories', {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
         setCategories(response.data);
       } catch (error) {
         console.log(error);
@@ -50,7 +60,7 @@ const Main: React.FC = () => {
     }
 
     loadUserLocation();
-  }, []);
+  }, [token]);
 
   const handleLocationMap = useCallback((data, { geometry }) => {
     const {
@@ -71,15 +81,25 @@ const Main: React.FC = () => {
     setShowFilterCategory(!showFilterCategory);
   }, [showFilterCategory]);
 
+  const handleProviderByCategory = useCallback((categoryId) => {
+    setFilterCategory(categoryId);
+  }, []);
+
   return (
     <Container>
-      <Maps placeSelected={userLocation} />
+      <Maps placeSelected={userLocation} category={filterCategory} />
+
       <SearchBar
         onLocationSelect={handleLocationMap}
         onShowCategoriesFilter={handleShowCategoriesFilter}
       />
 
-      {showFilterCategory && <ListCategories categories={categories} />}
+      {showFilterCategory && (
+        <ListCategories
+          handleProviderByCategory={handleProviderByCategory}
+          categories={categories}
+        />
+      )}
     </Container>
   );
 };

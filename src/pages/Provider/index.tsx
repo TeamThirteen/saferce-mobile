@@ -1,5 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import { Text, Linking, TouchableOpacity } from 'react-native';
+import React, { useEffect, useState, useCallback } from 'react';
+import {
+  Linking,
+  TouchableOpacity,
+  Alert,
+  ActivityIndicator,
+} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 
 import { RouteProp, useNavigation } from '@react-navigation/native';
@@ -10,6 +15,8 @@ import api from '../../services/api';
 import ItemSafe from '../../components/ItemSafe';
 import RatingSafe from '../../components/RatingSafe';
 import InformationProvider from '../../components/InformationProvider';
+
+import { useAuth } from '../../hooks/auth';
 
 import {
   Container,
@@ -36,12 +43,17 @@ type Props = {
 };
 
 interface ItemSafeProps {
-  title: string;
+  description: string;
+}
+
+interface CategoryProps {
+  id: number;
+  description: string;
+  image_url: string;
 }
 
 interface ProviderProps {
   title: string;
-  items: ItemSafeProps[];
   rating: number;
   address: string;
   district: string;
@@ -50,47 +62,64 @@ interface ProviderProps {
   whatsapp: string;
   phone: string;
   url_page_promotion: string;
-  category: {
-    id: number;
-    name: string;
-    image: string;
-  };
-  safe_items: object;
+  category: CategoryProps;
+  safe_items: ItemSafeProps;
 }
 
 const Provider: React.FC<Props> = ({ route }) => {
-  const navigate = useNavigation();
   const { id } = route.params;
+
+  const { token } = useAuth();
+  const navigation = useNavigation();
   const [provider, setProvider] = useState({} as ProviderProps);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     async function loadDetailsProvider(): Promise<void> {
-      const response = await api.get<ProviderProps>(`providers/${id}`);
-      setProvider(response.data);
+      setLoading(true);
+
+      try {
+        const response = await api.get<ProviderProps>(`providers/${id}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        setProvider(response.data);
+      } catch (err) {
+        Alert.alert(
+          'Ooops!',
+          'Houve um erro ao carregar as informações do provedor.',
+        );
+
+        navigation.goBack();
+      } finally {
+        setLoading(false);
+      }
     }
 
     loadDetailsProvider();
-  }, [id]);
+  }, [id, token, navigation]);
 
-  function doCall(phone: string): void {
+  const doCall = useCallback((phone: string) => {
     Linking.openURL(`tel:${phone}`);
-  }
+  }, []);
 
-  async function sendMessage(wpp: string): Promise<void> {
+  const sendMessage = useCallback(async (wpp: string) => {
     await axios.get(`https://api.whatsapp.com/send?phone=${wpp}`);
-  }
+  }, []);
 
-  function openSite(siteUrl: string): void {
+  const openSite = useCallback((siteUrl: string) => {
     Linking.openURL(siteUrl);
-  }
+  }, []);
 
   return (
     <Container>
-      {provider ? (
+      {!loading ? (
         <ProviderWrapper>
           <ProviderWrapperImage>
             <ProviderImage
-              source={{ uri: provider.category && provider.category.image }}
+              source={{ uri: provider.category && provider.category.image_url }}
               resizeMode="cover"
             >
               <ProviderImageGradient
@@ -100,7 +129,7 @@ const Provider: React.FC<Props> = ({ route }) => {
                   'rgba(0, 0, 0, 0.8)',
                 ]}
               >
-                <ButtonBack onPress={() => navigate.goBack()}>
+                <ButtonBack onPress={() => navigation.goBack()}>
                   <Icon name="arrow-left" size={18} color="#FFFFFF" />
                 </ButtonBack>
                 <RatingSafe rating={provider.rating} />
@@ -112,20 +141,24 @@ const Provider: React.FC<Props> = ({ route }) => {
             <InformationsItens>
               <ProviderName>{provider.title}</ProviderName>
               <ProviderCategory>
-                {provider.category && provider.category.name}
+                {provider.category && provider.category.description}
               </ProviderCategory>
             </InformationsItens>
 
             <Separator />
 
-            <InformationTitle>Itens</InformationTitle>
+            {provider.safe_items && provider.safe_items.length > 0 && (
+              <>
+                <InformationTitle>Itens</InformationTitle>
 
-            <ProviderItemsSafe
-              data={provider.safe_items}
-              horizontal
-              renderItem={({ item }) => <ItemSafe item={item} />}
-              keyExtractor={(item) => item.title}
-            />
+                <ProviderItemsSafe
+                  data={provider.safe_items}
+                  horizontal
+                  renderItem={({ item }) => <ItemSafe item={item} />}
+                  keyExtractor={(item) => item.description}
+                />
+              </>
+            )}
 
             <InformationTitle>Informações</InformationTitle>
 
@@ -184,7 +217,7 @@ const Provider: React.FC<Props> = ({ route }) => {
         </ProviderWrapper>
       ) : (
         <ProviderInfo>
-          <Text>Carregando...</Text>
+          <ActivityIndicator color="#C7C7C7" />
         </ProviderInfo>
       )}
     </Container>

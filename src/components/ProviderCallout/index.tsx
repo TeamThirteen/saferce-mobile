@@ -15,7 +15,7 @@ interface CalloutProps {
   title: string;
   description: string;
   category: {
-    name: string;
+    description: string;
   };
   image: string;
   rating: number;
@@ -37,10 +37,16 @@ const ProviderCallout: React.FC<ProviderProps> = ({ provider }) => {
         elevation: 5,
       }}
     >
-      <ProviderImage source={{ uri: provider.image }} />
+      <ProviderImage
+        source={{
+          uri: `https://api.adorable.io/avatars/285/${provider.title}`,
+        }}
+      />
       <ProviderInfo>
-        <ProviderTitle>{provider.title}</ProviderTitle>
-        <ProviderCategory>{provider.category.name}</ProviderCategory>
+        <ProviderTitle numberOfLines={1} ellipsizeMode="tail">
+          {provider.title}
+        </ProviderTitle>
+        <ProviderCategory>{provider.category.description}</ProviderCategory>
         <RatingSafe rating={provider.rating} size={15} preview />
       </ProviderInfo>
     </Container>

@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useCallback } from 'react';
+import { Alert } from 'react-native';
 import MapView, { Marker, Callout } from 'react-native-maps';
 import { useNavigation } from '@react-navigation/native';
 
@@ -6,6 +7,8 @@ import { MapStyle } from '../../assets/MapStyle';
 
 import ProviderMarker from '../ProviderMarker';
 import ProviderCallout from '../ProviderCallout';
+
+import { useAuth } from '../../hooks/auth';
 
 import api from '../../services/api';
 
@@ -18,17 +21,13 @@ interface GeoLocationProps {
 
 interface MapsProps {
   placeSelected: GeoLocationProps;
-}
-
-interface GeometryProps {
-  latitude: number;
-  longitude: number;
+  category: number | null;
 }
 
 interface CategoryProps {
   id: number;
-  name: string;
-  image: string;
+  description: string;
+  image_url: string;
 }
 
 interface MarkerProps {
@@ -37,26 +36,36 @@ interface MarkerProps {
   description: string;
   image: string;
   category: CategoryProps;
-  geometry: GeometryProps;
+  latitude: number;
+  longitude: number;
+  rating: number;
 }
 
-const Maps: React.FC<MapsProps> = ({ placeSelected }) => {
+const Maps: React.FC<MapsProps> = ({ placeSelected, category = null }) => {
+  const { token } = useAuth();
   const [markers, setMarkers] = useState<MarkerProps[]>([]);
   const navigation = useNavigation();
 
   useEffect(() => {
     async function loadMarkersMap(): Promise<void> {
       try {
-        const response = await api.get<MarkerProps[]>('providers');
+        const response = await api.get<MarkerProps[]>('providers', {
+          params: {
+            category,
+          },
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
 
         setMarkers(response.data);
       } catch (error) {
-        console.log(error);
+        Alert.alert('Ooops!', 'Aconteceu um erro, tente novamente mais tarde.');
       }
     }
 
     loadMarkersMap();
-  }, []);
+  }, [token, category]);
 
   const handleCalloutProvider = useCallback(
     (id: number): void => {
@@ -81,7 +90,13 @@ const Maps: React.FC<MapsProps> = ({ placeSelected }) => {
       customMapStyle={MapStyle}
     >
       {markers.map((marker) => (
-        <Marker key={String(marker.id)} coordinate={marker.geometry}>
+        <Marker
+          key={String(marker.id)}
+          coordinate={{
+            latitude: Number(marker.latitude),
+            longitude: Number(marker.longitude),
+          }}
+        >
           <ProviderMarker provider={marker} />
 
           <Callout tooltip onPress={() => handleCalloutProvider(marker.id)}>

@@ -6,6 +6,8 @@ import { NavigationContainer } from '@react-navigation/native';
 
 import Routes from './routes';
 
+import AppProvider from './hooks';
+
 import Theme from './theme';
 
 const App: React.FC = () => {
@@ -16,9 +18,11 @@ const App: React.FC = () => {
         backgroundColor={Theme.color.secondary}
         translucent
       />
-      <View style={{ flex: 1 }}>
-        <Routes />
-      </View>
+      <AppProvider>
+        <View style={{ flex: 1 }}>
+          <Routes />
+        </View>
+      </AppProvider>
     </NavigationContainer>
   );
 };

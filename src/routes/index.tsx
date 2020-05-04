@@ -17,7 +17,7 @@ const Ruotes: React.FC = () => {
     );
   }
 
-  return !user ? <AppRoutes /> : <AuthRoutes />;
+  return user ? <AppRoutes /> : <AuthRoutes />;
 };
 
 export default Ruotes;
