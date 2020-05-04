@@ -13,14 +13,19 @@ import {
 interface InformationProps {
   text: string;
   value: string;
+  icon?: string;
 }
 
-const InformationProvider: React.FC<InformationProps> = ({ text, value }) => {
+const InformationProvider: React.FC<InformationProps> = ({
+  text,
+  value,
+  icon = 'map-marker-alt',
+}) => {
   return (
     <Container>
       <Information>
         <InformationIcon>
-          <Icon name="map-marker-alt" size={22} color="#FFF" />
+          <Icon name={icon} size={22} color="#FFF" />
         </InformationIcon>
         <InformationDescription>
           <InformationText>{text}</InformationText>

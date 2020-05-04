@@ -58,3 +58,9 @@ export const InformationTitle = styled.Text`
   font-family: 'Poppins-Medium';
   margin-bottom: 20px;
 `;
+
+export const Hr = styled.View`
+  border-bottom-width: 2px;
+  border-bottom-color: #ccc;
+  margin: 20px 0 20px 0;
+`;
