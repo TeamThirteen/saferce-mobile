@@ -47,7 +47,7 @@ interface ProviderProps {
   location: string;
   whatsapp: string;
   phone: string;
-  site_url: string;
+  url_page_promotion: string;
   category: {
     id: number;
     name: string;
@@ -139,10 +139,12 @@ const Provider: React.FC<Props> = ({ route }) => {
                 icon="phone"
               />
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => openSite(provider.site_url)}>
+            <TouchableOpacity
+              onPress={() => openSite(provider.url_page_promotion)}
+            >
               <InformationProvider
                 text="Site"
-                value={provider.site_url}
+                value={provider.url_page_promotion}
                 icon="desktop"
               />
             </TouchableOpacity>
