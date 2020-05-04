@@ -10,13 +10,13 @@ Saferce is an application where users can find service providers closest to thei
 > This repository refers to the application mobile.
 
 <!-- vscode-markdown-toc -->
-* 1. [Important](#Important)
-	* 1.1. [Device Test](#DeviceTest)
-* 2. [Install Dependencies](#InstallDependencies)
-* 3. [Run](#Run)
-* 4. [Execute Metro Bundler](#ExecuteMetroBundler)
-* 5. [What I Used](#WhatIUsed)
-* 6. [My Setup Dev](#MySetupDev)
+* [Important](#Important)
+  * [Device Test](#DeviceTest)
+* [Install Dependencies](#InstallDependencies)
+* [Run](#Run)
+* [Execute Metro Bundler](#ExecuteMetroBundler)
+* [What I Used](#WhatIUsed)
+* [My Setup Dev](#MySetupDev)
 
 <!-- vscode-markdown-toc-config
 	numbering=true
@@ -24,28 +24,28 @@ Saferce is an application where users can find service providers closest to thei
 	/vscode-markdown-toc-config -->
 <!-- /vscode-markdown-toc -->
 
-##  1. <a name='Important'></a>Important
+## <a name='Important'></a>Important
 
 Essa aplicação funciona apenas em dispositivos com sistema operacional **Android**. Isto é, não foi testado e nem executado em um sistema operacional **iOS** por falta de equipamento.
 
-###  1.1. <a name='DeviceTest'></a>Device Test:
+### <a name='DeviceTest'></a>Device Test:
 
 - Pixel API 28
 - Android 9.0 Pie
 
-##  2. <a name='InstallDependencies'></a>Install Dependencies
+## <a name='InstallDependencies'></a>Install Dependencies
 
 	yarn
 
-##  3. <a name='Run'></a>Run
+## <a name='Run'></a>Run
 
 	yarn android
 
-##  4. <a name='ExecuteMetroBundler'></a>Execute Metro Bundler
+## <a name='ExecuteMetroBundler'></a>Execute Metro Bundler
 
 	yarn start --reset-cache
 
-##  5. <a name='WhatIUsed'></a>What I Used
+## <a name='WhatIUsed'></a>What I Used
 
 - React
 - Context API
@@ -55,7 +55,7 @@ Essa aplicação funciona apenas em dispositivos com sistema operacional **Andro
 - React Native Vector Icons
 - Axios
 
-##  6. <a name='MySetupDev'></a>My Setup Dev
+## <a name='MySetupDev'></a>My Setup Dev
 
 - ESLint
 - Prettier
