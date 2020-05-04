@@ -2,7 +2,7 @@ import styled from 'styled-components/native';
 import Theme from '../../theme';
 
 export const Container = styled.TouchableOpacity`
-  width: 260px;
+  width: 220px;
   height: 80px;
   background-color: #ffffff;
   border-radius: 15px;
@@ -27,11 +27,12 @@ export const ProviderInfo = styled.View`
 `;
 
 export const ProviderTitle = styled.Text`
-  font-family: 'RobotoSlab-Bold';
+  font-family: 'RobotoSlab-Medium';
   font-size: 15px;
 `;
 
 export const ProviderCategory = styled.Text`
-  font-family: 'RobotoSlab-Medium';
+  font-family: 'RobotoSlab-Regular';
   font-size: 13px;
+  margin-bottom: 5px;
 `;

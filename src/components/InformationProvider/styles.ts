@@ -33,6 +33,7 @@ export const InformationIcon = styled.View<InformationProps>`
 export const InformationText = styled.Text`
   font-size: 13px;
   font-family: 'RobotoSlab-Medium';
+  color: #000000;
 `;
 
 export const InformationValue = styled.Text`

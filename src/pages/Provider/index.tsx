@@ -24,6 +24,7 @@ import {
   InformationTitle,
   Separator,
   ButtonBack,
+  InformationsItens,
 } from './styles';
 
 type RootStackParamList = {
@@ -108,10 +109,16 @@ const Provider: React.FC<Props> = ({ route }) => {
           </ProviderWrapperImage>
 
           <ProviderInfo>
-            <ProviderName>{provider.title}</ProviderName>
-            <ProviderCategory>
-              {provider.category && provider.category.name}
-            </ProviderCategory>
+            <InformationsItens>
+              <ProviderName>{provider.title}</ProviderName>
+              <ProviderCategory>
+                {provider.category && provider.category.name}
+              </ProviderCategory>
+            </InformationsItens>
+
+            <Separator />
+
+            <InformationTitle>Itens</InformationTitle>
 
             <ProviderItemsSafe
               data={provider.safe_items}
@@ -121,45 +128,58 @@ const Provider: React.FC<Props> = ({ route }) => {
             />
 
             <InformationTitle>Informações</InformationTitle>
-            <InformationProvider
-              text="Endereço"
-              value={`${provider.address}, ${provider.number}`}
-            />
-            <InformationProvider text="Bairro" value={provider.district} />
-            <InformationProvider text="Localidade" value={provider.location} />
+
+            <InformationsItens>
+              <InformationProvider
+                text="Endereço"
+                value={`${provider.address}, ${provider.number}`}
+              />
+              <InformationProvider text="Bairro" value={provider.district} />
+              <InformationProvider
+                text="Localidade"
+                value={provider.location}
+              />
+            </InformationsItens>
 
             <Separator />
 
             <InformationTitle>Contato</InformationTitle>
-            <TouchableOpacity onPress={() => sendMessage(provider.whatsapp)}>
-              <InformationProvider
-                text="WhatsApp"
-                value={provider.whatsapp}
-                icon="whatsapp"
-                iconWhite
-                color="#25d366"
-                size={30}
-              />
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => doCall(provider.phone)}>
-              <InformationProvider
-                text="Telefone"
-                value={provider.phone}
-                icon="phone"
-                iconWhite
-                color="#34b7f1"
-                size={22}
-              />
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => openSite(provider.site_url)}>
-              <InformationProvider
-                text="Site"
-                value={provider.site_url}
-                color="#f5b971"
-                icon="desktop"
-                iconWhite
-              />
-            </TouchableOpacity>
+
+            <InformationsItens>
+              <TouchableOpacity onPress={() => sendMessage(provider.whatsapp)}>
+                <InformationProvider
+                  text="WhatsApp"
+                  value={provider.whatsapp}
+                  icon="whatsapp"
+                  iconWhite
+                  color="#25d366"
+                  size={30}
+                />
+              </TouchableOpacity>
+
+              <TouchableOpacity onPress={() => doCall(provider.phone)}>
+                <InformationProvider
+                  text="Telefone"
+                  value={provider.phone}
+                  icon="phone"
+                  iconWhite
+                  color="#34b7f1"
+                  size={22}
+                />
+              </TouchableOpacity>
+
+              <TouchableOpacity
+                onPress={() => openSite(provider.url_page_promotion)}
+              >
+                <InformationProvider
+                  text="Site"
+                  value={provider.url_page_promotion}
+                  color="#f5b971"
+                  icon="desktop"
+                  iconWhite
+                />
+              </TouchableOpacity>
+            </InformationsItens>
           </ProviderInfo>
         </ProviderWrapper>
       ) : (

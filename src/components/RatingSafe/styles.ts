@@ -5,17 +5,14 @@ interface ContainerProps {
 }
 
 export const Container = styled.View<ContainerProps>`
-  position: absolute;
   ${(props) =>
     !props.preview
       ? css`
           bottom: 10px;
           left: 20px;
+          position: absolute;
         `
-      : css`
-          top: 10px;
-          right: 10px;
-        `}
+      : css``}
 `;
 
 export const StarsRating = styled.View`

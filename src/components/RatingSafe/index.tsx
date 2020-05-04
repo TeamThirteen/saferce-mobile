@@ -24,7 +24,7 @@ const RatingSafe: React.FC<RatingSafeProps> = ({
           name="star"
           solid
           size={size}
-          color={rating < i ? '#FFFFFF' : '#f6d186'}
+          color={rating < i ? (preview ? '#666666' : '#FFFFFF') : '#f6d186'}
         />,
       );
     }

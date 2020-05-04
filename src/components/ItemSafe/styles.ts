@@ -5,7 +5,6 @@ interface ItemImageProps {
 }
 
 export const Container = styled.View`
-  margin-top: 40px;
   padding: 0px 0px 20px;
 `;
 

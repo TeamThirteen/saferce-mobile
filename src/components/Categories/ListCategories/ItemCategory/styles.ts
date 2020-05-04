@@ -15,8 +15,9 @@ export const CategoryImage = styled.ImageBackground`
 
 export const CategoryTitle = styled.Text`
   color: #000;
-  font-family: 'RobotoSlab-Bold';
-  margin-top: 6px;
+  font-family: 'RobotoSlab-Medium';
+  margin-top: 8px;
+  font-size: 15px;
 `;
 
 export const CategorySubTitle = styled.Text`

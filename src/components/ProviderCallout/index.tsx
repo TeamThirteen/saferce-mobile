@@ -41,8 +41,8 @@ const ProviderCallout: React.FC<ProviderProps> = ({ provider }) => {
       <ProviderInfo>
         <ProviderTitle>{provider.title}</ProviderTitle>
         <ProviderCategory>{provider.category.name}</ProviderCategory>
+        <RatingSafe rating={provider.rating} size={15} preview />
       </ProviderInfo>
-      <RatingSafe rating={provider.rating} size={9} preview />
     </Container>
   );
 };

@@ -36,7 +36,7 @@ export const ProviderImage = styled.ImageBackground`
 `;
 
 export const ProviderInfo = styled.View`
-  padding: 30px 20px 30px;
+  padding: 20px 20px 30px;
 `;
 
 export const ProviderName = styled.Text`
@@ -48,15 +48,15 @@ export const ProviderCategory = styled.Text`
   font-size: 16px;
   font-family: 'RobotoSlab-Regular';
   color: ${Theme.color.selected};
-  margin-top: -4px;
 `;
 
-export const ProviderItemsSafe = styled(FlatList)``;
+export const ProviderItemsSafe = styled(FlatList)`
+  margin-top: 20px;
+`;
 
 export const InformationTitle = styled.Text`
   font-size: 21px;
   font-family: 'RobotoSlab-Medium';
-  margin-bottom: 20px;
 `;
 
 export const Separator = styled.View`
@@ -70,4 +70,9 @@ export const ButtonBack = styled.TouchableOpacity`
   background-color: transparent;
   left: 20px;
   top: 20px;
+`;
+
+export const InformationsItens = styled.View`
+  flex: 1;
+  margin-top: 20px;
 `;
