@@ -27,11 +27,11 @@ export const ProviderInfo = styled.View`
 `;
 
 export const ProviderTitle = styled.Text`
-  font-family: 'Poppins-Bold';
+  font-family: 'RobotoSlab-Bold';
   font-size: 15px;
 `;
 
 export const ProviderCategory = styled.Text`
-  font-family: 'Poppins-Medium';
+  font-family: 'RobotoSlab-Medium';
   font-size: 13px;
 `;

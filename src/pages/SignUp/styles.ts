@@ -1,6 +1,8 @@
 import styled from 'styled-components/native';
 import { Platform } from 'react-native';
 
+import Theme from '../../theme';
+
 export const Container = styled.View`
   flex: 1;
   align-items: center;
@@ -9,26 +11,16 @@ export const Container = styled.View`
 `;
 
 export const ImageLogo = styled.Image`
-  height: 170px;
-  width: 170px;
+  height: 120px;
+  width: 120px;
   margin-top: 50px;
 `;
 
 export const Title = styled.Text`
   font-size: 24px;
-  color: #f4ede8;
-  font-family: 'Poppins-Medium';
+  color: #666666;
+  font-family: 'RobotoSlab-Regular';
   margin: 44px 0px 24px;
-`;
-
-export const ForgotPassword = styled.TouchableOpacity`
-  margin-top: 24px;
-`;
-
-export const ForgotPasswordText = styled.Text`
-  color: #f4ede8;
-  font-size: 16px;
-  font-family: 'Poppins-Regular';
 `;
 
 export const BackToSigIn = styled.TouchableOpacity`
@@ -36,19 +28,13 @@ export const BackToSigIn = styled.TouchableOpacity`
   color: #ff9000;
   flex-direction: row;
   justify-content: center;
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: #312e38;
-  border-top-width: 1px;
-  border-color: #232129;
   padding: 16px 0px;
+  margin-top: 20px;
 `;
 
 export const BackToSigInText = styled.Text`
-  color: #ffffff;
-  font-size: 18px;
-  font-family: 'Poppins-Regular';
+  color: ${Theme.color.pink};
+  font-size: 14px;
+  font-family: 'RobotoSlab-Bold';
   margin-left: 16px;
 `;

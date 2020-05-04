@@ -11,45 +11,49 @@ export const Container = styled.View`
 `;
 
 export const ImageLogo = styled.Image`
-  height: 170px;
-  width: 170px;
+  height: 120px;
+  width: 120px;
   margin-top: 50px;
 `;
 
 export const Title = styled.Text`
-  font-size: 24px;
-  color: #f4ede8;
-  font-family: 'Poppins-Medium';
+  font-size: 22px;
+  color: #666666;
+  font-family: 'RobotoSlab-Regular';
   margin: 44px 0px 24px;
 `;
 
 export const ForgotPassword = styled.TouchableOpacity`
-  margin-top: 24px;
+  margin-top: 15px;
+  flex: 1;
+  align-items: flex-end;
+  width: 100%;
 `;
 
 export const ForgotPasswordText = styled.Text`
-  color: #f4ede8;
+  color: ${Theme.color.pink};
   font-size: 16px;
-  font-family: 'Poppins-Regular';
+  font-family: 'RobotoSlab-Bold';
 `;
 
 export const CreateAccountButton = styled.TouchableOpacity`
   align-items: center;
   justify-content: center;
   flex-direction: row;
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: ${Theme.color.pink};
-  border-top-width: 1px;
-  border-color: #232129;
   padding: 16px 0px;
+  margin-top: 20px;
+`;
+
+export const CreateAccountText = styled.Text`
+  color: #000000;
+  font-size: 14px;
+  font-family: 'RobotoSlab-Regular';
+  margin-right: 10px;
 `;
 
 export const CreateAccountButtonText = styled.Text`
-  color: #ffffff;
-  font-size: 18px;
-  font-family: 'Poppins-Regular';
-  margin-left: 16px;
+  color: ${Theme.color.pink};
+  font-size: 14px;
+  font-family: 'RobotoSlab-Bold';
+  margin-left: 10px;
 `;

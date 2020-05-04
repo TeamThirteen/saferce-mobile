@@ -41,12 +41,12 @@ export const ProviderInfo = styled.View`
 
 export const ProviderName = styled.Text`
   font-size: 21px;
-  font-family: 'Poppins-Medium';
+  font-family: 'RobotoSlab-Medium';
 `;
 
 export const ProviderCategory = styled.Text`
   font-size: 16px;
-  font-family: 'Poppins-Regular';
+  font-family: 'RobotoSlab-Regular';
   color: ${Theme.color.selected};
   margin-top: -4px;
 `;
@@ -55,7 +55,7 @@ export const ProviderItemsSafe = styled(FlatList)``;
 
 export const InformationTitle = styled.Text`
   font-size: 21px;
-  font-family: 'Poppins-Medium';
+  font-family: 'RobotoSlab-Medium';
   margin-bottom: 20px;
 `;
 

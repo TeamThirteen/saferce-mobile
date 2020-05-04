@@ -6,15 +6,15 @@ import Theme from '../../theme';
 export const Container = styled(RectButton)`
   width: 100%;
   height: 60px;
-  background: ${Theme.color.primary};
+  background: ${Theme.color.pink};
   border-radius: 10px;
   justify-content: center;
   align-items: center;
-  margin-top: 8px;
+  margin-top: 25px;
 `;
 
 export const ButtonText = styled.Text`
   font-family: 'RobotoSlab-Medium';
-  color: #312e38;
+  color: #ffffff;
   font-size: 18px;
 `;

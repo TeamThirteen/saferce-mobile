@@ -1,6 +1,5 @@
 import React, { useCallback, useRef } from 'react';
 import {
-  Image,
   View,
   KeyboardAvoidingView,
   ScrollView,
@@ -135,14 +134,14 @@ const SignUp: React.FC = () => {
                 CADASTRAR
               </Button>
             </Form>
+
+            <BackToSigIn onPress={() => navigation.goBack()}>
+              <Icon name="arrow-left" color="#ff225c" size={20} />
+              <BackToSigInText>VOLTAR PARA LOGIN</BackToSigInText>
+            </BackToSigIn>
           </Container>
         </ScrollView>
       </KeyboardAvoidingView>
-
-      <BackToSigIn onPress={() => navigation.goBack()}>
-        <Icon name="arrow-left" color="#FFFFFF" size={20} />
-        <BackToSigInText>Voltar para login</BackToSigInText>
-      </BackToSigIn>
     </>
   );
 };

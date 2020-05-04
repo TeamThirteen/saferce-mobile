@@ -84,7 +84,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
           marginLeft: 0,
           marginRight: 0,
           fontSize: 14,
-          fontFamily: 'Poppins-Regular',
+          fontFamily: 'RobotoSlab-Regular',
           borderTopWidth: 0,
           borderBottomWidth: 0,
           borderWidth: 0,

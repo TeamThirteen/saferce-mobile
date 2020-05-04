@@ -1,6 +1,5 @@
 import React, { useCallback, useRef } from 'react';
 import {
-  Image,
   View,
   KeyboardAvoidingView,
   ScrollView,
@@ -31,6 +30,7 @@ import {
   ForgotPasswordText,
   CreateAccountButton,
   CreateAccountButtonText,
+  CreateAccountText,
   ImageLogo,
 } from './styles';
 
@@ -121,26 +121,27 @@ const SignIn: React.FC = () => {
                 onSubmitEditing={() => formRef.current?.submitForm()}
               />
 
+              <ForgotPassword
+                onPress={() => {
+                  console.log('Forgot Password');
+                }}
+              >
+                <ForgotPasswordText>ESQUECI A SENHA</ForgotPasswordText>
+              </ForgotPassword>
+
               <Button onPress={() => formRef.current?.submitForm()}>
                 ACESSAR
               </Button>
             </Form>
 
-            <ForgotPassword
-              onPress={() => {
-                console.log('Forgot Password');
-              }}
-            >
-              <ForgotPasswordText>Esqueci minha senha</ForgotPasswordText>
-            </ForgotPassword>
+            <CreateAccountButton onPress={() => navigation.navigate('SignUp')}>
+              <CreateAccountText>Você não tem uma conta?</CreateAccountText>
+              <Icon name="log-in" color="#ff225c" size={24} />
+              <CreateAccountButtonText>CRIAR CONTA</CreateAccountButtonText>
+            </CreateAccountButton>
           </Container>
         </ScrollView>
       </KeyboardAvoidingView>
-
-      <CreateAccountButton onPress={() => navigation.navigate('SignUp')}>
-        <Icon name="log-in" color="#FFFFFF" size={24} />
-        <CreateAccountButtonText>Criar uma conta</CreateAccountButtonText>
-      </CreateAccountButton>
     </>
   );
 };
