@@ -79,9 +79,9 @@ const Maps: React.FC<MapsProps> = ({ placeSelected, category = null }) => {
   return (
     <MapView
       style={{ flex: 1 }}
-      initialRegion={placeSelected}
       region={placeSelected}
       showsUserLocation
+      followsUserLocation
       showsPointsOfInterest={false}
       showsCompass={false}
       loadingEnabled

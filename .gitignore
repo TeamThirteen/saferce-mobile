@@ -51,6 +51,7 @@ buck-out
 local.properties
 *.iml
 /android/
+*.hprof
 
 # Node
 node_modules
