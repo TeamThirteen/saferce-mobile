@@ -17,7 +17,8 @@ const callLocation = (): Promise<GeolocationResponse> => {
       () => ({}),
       {
         enableHighAccuracy: true,
-        timeout: 50000,
+        maximumAge: 1000,
+        timeout: 2000,
       },
     );
   });

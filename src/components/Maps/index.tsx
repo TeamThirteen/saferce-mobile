@@ -80,10 +80,12 @@ const Maps: React.FC<MapsProps> = ({ placeSelected, category = null }) => {
     <MapView
       style={{ flex: 1 }}
       region={placeSelected}
+      initialRegion={placeSelected}
       showsUserLocation
       followsUserLocation
       showsPointsOfInterest={false}
       showsCompass={false}
+      showsMyLocationButton={false}
       loadingEnabled
       minZoomLevel={10}
       maxZoomLevel={20}
