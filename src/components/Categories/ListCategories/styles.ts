@@ -2,6 +2,12 @@ import styled from 'styled-components/native';
 import { FlatList } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 
+interface CategoryProps {
+  id: number;
+  description: string;
+  image_url: string;
+}
+
 export const Container = styled(LinearGradient)`
   position: absolute;
   width: 100%;
@@ -12,7 +18,9 @@ export const Container = styled(LinearGradient)`
   padding: 0px 10px;
 `;
 
-export const FlatListCategories = styled(FlatList)`
+export const FlatListCategories = styled(
+  FlatList as new () => FlatList<CategoryProps>,
+)`
   padding: 0px 10px;
   margin-top: 15px;
 `;

@@ -4,6 +4,13 @@ import { FlatList } from 'react-native';
 
 import Theme from '../../theme';
 
+interface ItemSafeProps {
+  description: string;
+  id: number;
+  color: string;
+  icon: string;
+}
+
 export const Container = styled.View`
   justify-content: center;
   align-items: center;
@@ -50,7 +57,9 @@ export const ProviderCategory = styled.Text`
   color: ${Theme.color.selected};
 `;
 
-export const ProviderItemsSafe = styled(FlatList)`
+export const ProviderItemsSafe = styled(
+  FlatList as new () => FlatList<ItemSafeProps>,
+)`
   margin-top: 20px;
 `;
 

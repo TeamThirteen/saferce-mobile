@@ -9,7 +9,6 @@ import Icon from 'react-native-vector-icons/FontAwesome5';
 
 import { RouteProp, useNavigation } from '@react-navigation/native';
 
-import axios from 'axios';
 import api from '../../services/api';
 
 import ItemSafe from '../../components/ItemSafe';
@@ -44,6 +43,9 @@ type Props = {
 
 interface ItemSafeProps {
   description: string;
+  id: number;
+  icon: string;
+  color: string;
 }
 
 interface CategoryProps {
@@ -63,7 +65,7 @@ interface ProviderProps {
   phone: string;
   url_page_promotion: string;
   category: CategoryProps;
-  safe_items: ItemSafeProps;
+  safe_items: ItemSafeProps[];
 }
 
 const Provider: React.FC<Props> = ({ route }) => {
@@ -147,18 +149,19 @@ const Provider: React.FC<Props> = ({ route }) => {
 
             <Separator />
 
-            {provider.safe_items && provider.safe_items.length > 0 && (
-              <>
-                <InformationTitle>Itens</InformationTitle>
+            {provider.safe_items &&
+              Object.keys(provider.safe_items).length > 0 && (
+                <>
+                  <InformationTitle>Itens</InformationTitle>
 
-                <ProviderItemsSafe
-                  data={provider.safe_items}
-                  horizontal
-                  renderItem={({ item }) => <ItemSafe item={item} />}
-                  keyExtractor={(item) => item.description}
-                />
-              </>
-            )}
+                  <ProviderItemsSafe
+                    data={provider.safe_items}
+                    horizontal
+                    renderItem={({ item }) => <ItemSafe item={item} />}
+                    keyExtractor={(item) => item.description}
+                  />
+                </>
+              )}
 
             <InformationTitle>Informações</InformationTitle>
 
