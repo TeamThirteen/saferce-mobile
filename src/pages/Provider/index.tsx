@@ -60,7 +60,8 @@ interface ProviderProps {
   address: string;
   district: string;
   number: string;
-  location: string;
+  city: string;
+  state: string;
   whatsapp: string;
   phone: string;
   url_page_promotion: string;
@@ -173,7 +174,7 @@ const Provider: React.FC<Props> = ({ route }) => {
               <InformationProvider text="Bairro" value={provider.district} />
               <InformationProvider
                 text="Localidade"
-                value={provider.location}
+                value={`${provider.city}, ${provider.state}`}
               />
             </InformationsItens>
 
