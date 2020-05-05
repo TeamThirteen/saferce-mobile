@@ -81,7 +81,7 @@ const Maps: React.FC<MapsProps> = ({ placeSelected, category = null }) => {
       style={{ flex: 1 }}
       initialRegion={placeSelected}
       region={placeSelected}
-      showsUserLocation={false}
+      showsUserLocation
       showsPointsOfInterest={false}
       showsCompass={false}
       loadingEnabled

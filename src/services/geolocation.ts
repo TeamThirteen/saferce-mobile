@@ -1,4 +1,4 @@
-import { PermissionsAndroid, Platform, Alert, AlertType } from 'react-native';
+import { PermissionsAndroid, Platform } from 'react-native';
 import Geolocation, {
   GeolocationResponse,
 } from '@react-native-community/geolocation';
@@ -17,8 +17,7 @@ const callLocation = (): Promise<GeolocationResponse> => {
       () => ({}),
       {
         enableHighAccuracy: true,
-        timeout: 100,
-        maximumAge: 0,
+        timeout: 50000,
       },
     );
   });
@@ -38,15 +37,28 @@ async function requestLocationPermission(): Promise<GeolocationResponse> {
     const response = await callLocation();
     return response;
   }
+
+  return {
+    coords: {
+      latitude: 0,
+      longitude: 0,
+      altitude: 0,
+      accuracy: 0,
+      altitudeAccuracy: 0,
+      heading: 0,
+      speed: 0,
+    },
+    timestamp: 0,
+  };
 }
 
 const getUserCurrentPosition = async (): Promise<GeolocationResponse> => {
   if (Platform.OS === 'ios') {
-    callLocation();
-  } else {
-    const response = await requestLocationPermission();
-    return response;
+    return callLocation();
   }
+
+  const response = await requestLocationPermission();
+  return response;
 };
 
 export default getUserCurrentPosition;
