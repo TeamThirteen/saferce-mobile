@@ -11,11 +11,23 @@ interface CategoryProps {
 export const Container = styled(LinearGradient)`
   position: absolute;
   width: 100%;
-  height: 210px;
   background: transparent;
   bottom: 0px;
   left: 0;
-  padding: 0px 10px;
+  padding: 30px 10px 20px;
+  border-top-left-radius: 40px;
+  border-top-right-radius: 40px;
+`;
+
+export const LineTop = styled.TouchableOpacity`
+  height: 4px;
+  background-color: #c7c7c7;
+  width: 50px;
+  border-radius: 4px;
+  position: absolute;
+  top: 10px;
+  margin: auto;
+  align-self: center;
 `;
 
 export const FlatListCategories = styled(
@@ -30,7 +42,7 @@ export const FilterTitle = styled.View`
 `;
 
 export const FilterTitleText = styled.Text`
-  font-size: 25px;
+  font-size: 20px;
   color: #888888;
   font-family: 'RobotoSlab-Medium';
 `;

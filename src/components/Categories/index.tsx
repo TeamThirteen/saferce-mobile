@@ -10,7 +10,7 @@ interface CategoriesProps {
 const Categories: React.FC<CategoriesProps> = ({ onShowCategoriesFilter }) => {
   return (
     <Container onPress={onShowCategoriesFilter}>
-      <Icon name="feather" color="#FFF" size={22} />
+      <Icon name="grid" color="#FFF" size={22} />
     </Container>
   );
 };

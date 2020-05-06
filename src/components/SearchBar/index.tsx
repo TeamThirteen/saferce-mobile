@@ -54,8 +54,8 @@ const SearchBar: React.FC<SearchBarProps> = ({
         container: {
           position: 'absolute',
           backgroundColor: 'transparent',
-          marginHorizontal: '2.5%',
-          width: '95%',
+          marginHorizontal: '5%',
+          width: '90%',
           top: Platform.select({ ios: 60, android: 40 }),
         },
         textInputContainer: {

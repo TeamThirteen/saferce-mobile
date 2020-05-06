@@ -17,10 +17,17 @@ interface CategoriesProps {
   image_url: string;
 }
 
+interface GeoLocationProps {
+  latitude: number;
+  longitude: number;
+  latitudeDelta: number;
+  longitudeDelta: number;
+}
+
 const Main: React.FC = () => {
   const { token } = useAuth();
 
-  const [userLocation, setUserLocation] = useState({
+  const [userLocation] = useState({
     latitude: -22.736997,
     longitude: -47.647893,
     latitudeDelta: 0.04,
@@ -28,22 +35,23 @@ const Main: React.FC = () => {
   });
 
   const [categories, setCategories] = useState([] as CategoriesProps[]);
+  const [position, setPosition] = useState({} as GeoLocationProps);
   const [showFilterCategory, setShowFilterCategory] = useState(false);
   const [filterCategory, setFilterCategory] = useState(null);
 
   useEffect(() => {
     async function loadUserLocation(): Promise<void> {
       try {
-        const position = await Geolocation();
+        const geoLocationUser = await Geolocation();
 
         const coordinates = {
-          latitude: position.coords.latitude,
-          longitude: position.coords.longitude,
+          latitude: geoLocationUser.coords.latitude,
+          longitude: geoLocationUser.coords.longitude,
           latitudeDelta: 0.04,
           longitudeDelta: 0.05,
         };
 
-        setUserLocation(coordinates);
+        setPosition(coordinates);
       } catch (error) {
         Alert.alert('Permissão Negada para Localização');
       }
@@ -79,7 +87,7 @@ const Main: React.FC = () => {
       longitudeDelta: 0.05,
     };
 
-    setUserLocation(placeSelected);
+    setPosition(placeSelected);
   }, []);
 
   const handleShowCategoriesFilter = useCallback(() => {
@@ -90,9 +98,20 @@ const Main: React.FC = () => {
     setFilterCategory(categoryId);
   }, []);
 
+  const handleChangeRegion = useCallback((newPosition) => {
+    setPosition(newPosition);
+  }, []);
+
   return (
     <Container>
-      <Maps placeSelected={userLocation} category={filterCategory} />
+      {position && (
+        <Maps
+          placeSelected={userLocation}
+          position={position}
+          category={filterCategory}
+          handleChangeRegion={handleChangeRegion}
+        />
+      )}
 
       <SearchBar
         onLocationSelect={handleLocationMap}
@@ -101,6 +120,7 @@ const Main: React.FC = () => {
 
       {showFilterCategory && (
         <ListCategories
+          onShowCategoriesFilter={handleShowCategoriesFilter}
           handleProviderByCategory={handleProviderByCategory}
           categories={categories}
         />

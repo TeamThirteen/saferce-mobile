@@ -7,6 +7,7 @@ import { MapStyle } from '../../assets/MapStyle';
 
 import ProviderMarker from '../ProviderMarker';
 import ProviderCallout from '../ProviderCallout';
+import PositionUser from '../PositionUser';
 
 import { useAuth } from '../../hooks/auth';
 
@@ -21,7 +22,9 @@ interface GeoLocationProps {
 
 interface MapsProps {
   placeSelected: GeoLocationProps;
+  position: GeoLocationProps;
   category: number | null;
+  handleChangeRegion(): void;
 }
 
 interface CategoryProps {
@@ -41,7 +44,12 @@ interface MarkerProps {
   rating: number;
 }
 
-const Maps: React.FC<MapsProps> = ({ placeSelected, category = null }) => {
+const Maps: React.FC<MapsProps> = ({
+  placeSelected,
+  position,
+  category = null,
+  handleChangeRegion,
+}) => {
   const { token } = useAuth();
   const [markers, setMarkers] = useState<MarkerProps[]>([]);
   const navigation = useNavigation();
@@ -79,9 +87,8 @@ const Maps: React.FC<MapsProps> = ({ placeSelected, category = null }) => {
   return (
     <MapView
       style={{ flex: 1 }}
-      region={placeSelected}
-      initialRegion={placeSelected}
-      showsUserLocation
+      region={position.latitude ? position : placeSelected}
+      onRegionChangeComplete={handleChangeRegion}
       followsUserLocation
       showsPointsOfInterest={false}
       showsCompass={false}
@@ -91,6 +98,13 @@ const Maps: React.FC<MapsProps> = ({ placeSelected, category = null }) => {
       maxZoomLevel={20}
       customMapStyle={MapStyle}
     >
+      <Marker
+        key="position-user"
+        coordinate={position.latitude ? position : placeSelected}
+      >
+        <PositionUser />
+      </Marker>
+
       {markers.map((marker) => (
         <Marker
           key={String(marker.id)}
