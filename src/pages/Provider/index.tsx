@@ -5,6 +5,7 @@ import {
   Alert,
   ActivityIndicator,
   RefreshControl,
+  ScrollView,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 
@@ -125,12 +126,7 @@ const Provider: React.FC<Props> = ({ route }) => {
   }, []);
 
   return (
-    <Container
-      contentContainerStyle={{
-        justifyContent: 'center',
-        alignItems: 'center',
-        flex: 1,
-      }}
+    <ScrollView
       refreshControl={
         <RefreshControl
           progressViewOffset={30}
@@ -140,113 +136,125 @@ const Provider: React.FC<Props> = ({ route }) => {
         />
       }
     >
-      {!loading ? (
-        <ProviderWrapper>
-          <ProviderWrapperImage>
-            <ProviderImage
-              source={{ uri: provider.category && provider.category.image_url }}
-              resizeMode="cover"
-            >
-              <ProviderImageGradient
-                colors={[
-                  'rgba(0, 0, 0, 0.1)',
-                  'rgba(0, 0, 0, 0.3)',
-                  'rgba(0, 0, 0, 0.8)',
-                ]}
+      <Container
+        contentContainerStyle={{
+          justifyContent: 'center',
+          alignItems: 'center',
+          flex: 1,
+        }}
+      >
+        {!loading ? (
+          <ProviderWrapper>
+            <ProviderWrapperImage>
+              <ProviderImage
+                source={{
+                  uri: provider.category && provider.category.image_url,
+                }}
+                resizeMode="cover"
               >
-                <ButtonBack onPress={() => navigation.goBack()}>
-                  <Icon name="arrow-left" size={18} color="#FFFFFF" />
-                </ButtonBack>
-                <RatingSafe rating={provider.rating} />
-              </ProviderImageGradient>
-            </ProviderImage>
-          </ProviderWrapperImage>
+                <ProviderImageGradient
+                  colors={[
+                    'rgba(0, 0, 0, 0.1)',
+                    'rgba(0, 0, 0, 0.3)',
+                    'rgba(0, 0, 0, 0.8)',
+                  ]}
+                >
+                  <ButtonBack onPress={() => navigation.goBack()}>
+                    <Icon name="arrow-left" size={18} color="#FFFFFF" />
+                  </ButtonBack>
+                  <RatingSafe rating={provider.rating} />
+                </ProviderImageGradient>
+              </ProviderImage>
+            </ProviderWrapperImage>
 
-          <ProviderInfo>
-            <InformationsItens>
-              <ProviderName>{provider.title}</ProviderName>
-              <ProviderCategory>
-                {provider.category && provider.category.description}
-              </ProviderCategory>
-            </InformationsItens>
+            <ProviderInfo>
+              <InformationsItens>
+                <ProviderName>{provider.title}</ProviderName>
+                <ProviderCategory>
+                  {provider.category && provider.category.description}
+                </ProviderCategory>
+              </InformationsItens>
 
-            <Separator />
+              <Separator />
 
-            {provider.safe_items &&
-              Object.keys(provider.safe_items).length > 0 && (
-                <>
-                  <InformationTitle>Itens</InformationTitle>
+              {provider.safe_items &&
+                Object.keys(provider.safe_items).length > 0 && (
+                  <>
+                    <InformationTitle>Itens</InformationTitle>
 
-                  <ProviderItemsSafe
-                    data={provider.safe_items}
-                    horizontal
-                    renderItem={({ item }) => <ItemSafe item={item} />}
-                    keyExtractor={(item) => item.description}
+                    <ProviderItemsSafe
+                      data={provider.safe_items}
+                      horizontal
+                      renderItem={({ item }) => <ItemSafe item={item} />}
+                      keyExtractor={(item) => item.description}
+                    />
+                  </>
+                )}
+
+              <InformationTitle>Informações</InformationTitle>
+
+              <InformationsItens>
+                <InformationProvider
+                  text="Endereço"
+                  value={`${provider.address}, ${provider.number}`}
+                />
+                <InformationProvider text="Bairro" value={provider.district} />
+                <InformationProvider
+                  text="Localidade"
+                  value={`${provider.city}, ${provider.state}`}
+                />
+              </InformationsItens>
+
+              <Separator />
+
+              <InformationTitle>Contato</InformationTitle>
+
+              <InformationsItens>
+                <TouchableOpacity
+                  onPress={() => sendMessage(provider.whatsapp)}
+                >
+                  <InformationProvider
+                    text="WhatsApp"
+                    value={provider.whatsapp}
+                    icon="whatsapp"
+                    iconWhite
+                    color="#25d366"
+                    size={30}
                   />
-                </>
-              )}
+                </TouchableOpacity>
 
-            <InformationTitle>Informações</InformationTitle>
+                <TouchableOpacity onPress={() => doCall(provider.phone)}>
+                  <InformationProvider
+                    text="Telefone"
+                    value={provider.phone}
+                    icon="phone"
+                    iconWhite
+                    color="#34b7f1"
+                    size={22}
+                  />
+                </TouchableOpacity>
 
-            <InformationsItens>
-              <InformationProvider
-                text="Endereço"
-                value={`${provider.address}, ${provider.number}`}
-              />
-              <InformationProvider text="Bairro" value={provider.district} />
-              <InformationProvider
-                text="Localidade"
-                value={`${provider.city}, ${provider.state}`}
-              />
-            </InformationsItens>
-
-            <Separator />
-
-            <InformationTitle>Contato</InformationTitle>
-
-            <InformationsItens>
-              <TouchableOpacity onPress={() => sendMessage(provider.whatsapp)}>
-                <InformationProvider
-                  text="WhatsApp"
-                  value={provider.whatsapp}
-                  icon="whatsapp"
-                  iconWhite
-                  color="#25d366"
-                  size={30}
-                />
-              </TouchableOpacity>
-
-              <TouchableOpacity onPress={() => doCall(provider.phone)}>
-                <InformationProvider
-                  text="Telefone"
-                  value={provider.phone}
-                  icon="phone"
-                  iconWhite
-                  color="#34b7f1"
-                  size={22}
-                />
-              </TouchableOpacity>
-
-              <TouchableOpacity
-                onPress={() => openSite(provider.url_page_promotion)}
-              >
-                <InformationProvider
-                  text="Site"
-                  value={provider.url_page_promotion}
-                  color="#f5b971"
-                  icon="desktop"
-                  iconWhite
-                />
-              </TouchableOpacity>
-            </InformationsItens>
+                <TouchableOpacity
+                  onPress={() => openSite(provider.url_page_promotion)}
+                >
+                  <InformationProvider
+                    text="Site"
+                    value={provider.url_page_promotion}
+                    color="#f5b971"
+                    icon="desktop"
+                    iconWhite
+                  />
+                </TouchableOpacity>
+              </InformationsItens>
+            </ProviderInfo>
+          </ProviderWrapper>
+        ) : (
+          <ProviderInfo>
+            <ActivityIndicator color="#C7C7C7" />
           </ProviderInfo>
-        </ProviderWrapper>
-      ) : (
-        <ProviderInfo>
-          <ActivityIndicator color="#C7C7C7" />
-        </ProviderInfo>
-      )}
-    </Container>
+        )}
+      </Container>
+    </ScrollView>
   );
 };
 
