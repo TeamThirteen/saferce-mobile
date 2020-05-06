@@ -8,7 +8,7 @@ import { Container } from './styles';
 
 import { useAuth } from '../../hooks/auth';
 
-import Geolocation from '../../services/geolocation';
+import { getUserCurrentPosition } from '../../services/geolocation';
 import api from '../../services/api';
 
 interface CategoriesProps {
@@ -27,19 +27,34 @@ interface GeoLocationProps {
 const Main: React.FC = () => {
   const { token } = useAuth();
 
-  const [userLocation] = useState({
+  const [categories, setCategories] = useState([] as CategoriesProps[]);
+  const [position, setPosition] = useState({
     latitude: -22.736997,
     longitude: -47.647893,
     latitudeDelta: 0.04,
     longitudeDelta: 0.05,
-  });
-
-  const [categories, setCategories] = useState([] as CategoriesProps[]);
-  const [position, setPosition] = useState({} as GeoLocationProps);
+  } as GeoLocationProps);
   const [showFilterCategory, setShowFilterCategory] = useState(false);
   const [filterCategory, setFilterCategory] = useState(null);
 
   useEffect(() => {
+    async function handleCurrentPositionUser(): Promise<void> {
+      try {
+        const geoLocationUser = await getUserCurrentPosition();
+
+        const coordinates = {
+          latitude: geoLocationUser.coords.latitude,
+          longitude: geoLocationUser.coords.longitude,
+          latitudeDelta: 0.04,
+          longitudeDelta: 0.05,
+        };
+
+        setPosition(coordinates);
+      } catch (error) {
+        Alert.alert('Permissão Negada para Localização');
+      }
+    }
+
     async function loadCategories(): Promise<void> {
       try {
         const response = await api.get<CategoriesProps[]>('categories', {
@@ -54,25 +69,9 @@ const Main: React.FC = () => {
       }
     }
 
+    handleCurrentPositionUser();
     loadCategories();
   }, [token]);
-
-  const handleCurrentPositionUser = useCallback(async () => {
-    try {
-      const geoLocationUser = await Geolocation();
-
-      const coordinates = {
-        latitude: geoLocationUser.coords.latitude,
-        longitude: geoLocationUser.coords.longitude,
-        latitudeDelta: 0.04,
-        longitudeDelta: 0.05,
-      };
-
-      setPosition(coordinates);
-    } catch (error) {
-      Alert.alert('Permissão Negada para Localização');
-    }
-  }, []);
 
   const handleShowCategoriesFilter = useCallback(() => {
     setShowFilterCategory(!showFilterCategory);
@@ -97,21 +96,9 @@ const Main: React.FC = () => {
     setFilterCategory(categoryId);
   }, []);
 
-  const handleChangeRegion = useCallback((newPosition) => {
-    setPosition(newPosition);
-  }, []);
-
   return (
     <Container>
-      {position && (
-        <Maps
-          placeSelected={userLocation}
-          position={position}
-          category={filterCategory}
-          handleCurrentPositionUser={handleCurrentPositionUser}
-          handleChangeRegion={handleChangeRegion}
-        />
-      )}
+      {position && <Maps position={position} category={filterCategory} />}
 
       <SearchBar
         onLocationSelect={handleLocationMap}

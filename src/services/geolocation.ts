@@ -24,6 +24,22 @@ const callLocation = (): Promise<GeolocationResponse> => {
   });
 };
 
+const getWatchPosition = (): Promise<GeolocationResponse> => {
+  return new Promise((resolve) => {
+    Geolocation.watchPosition(
+      (position) => {
+        resolve(position);
+      },
+      () => ({}),
+      {
+        enableHighAccuracy: true,
+        maximumAge: 1000,
+        timeout: 20000,
+      },
+    );
+  });
+};
+
 async function requestLocationPermission(): Promise<GeolocationResponse> {
   const granted = await PermissionsAndroid.request(
     PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
@@ -62,4 +78,4 @@ const getUserCurrentPosition = async (): Promise<GeolocationResponse> => {
   return response;
 };
 
-export default getUserCurrentPosition;
+export { getUserCurrentPosition, getWatchPosition };

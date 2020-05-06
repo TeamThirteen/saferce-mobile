@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useCallback } from 'react';
-import { Alert } from 'react-native';
+import { Alert, ActivityIndicator } from 'react-native';
 import MapView, { Marker, Callout } from 'react-native-maps';
 import { useNavigation } from '@react-navigation/native';
 
@@ -21,11 +21,8 @@ interface GeoLocationProps {
 }
 
 interface MapsProps {
-  placeSelected: GeoLocationProps;
   position: GeoLocationProps;
   category: number | null;
-  handleChangeRegion(newPosition: object): void;
-  handleCurrentPositionUser(): void;
 }
 
 interface CategoryProps {
@@ -45,13 +42,7 @@ interface MarkerProps {
   rating: number;
 }
 
-const Maps: React.FC<MapsProps> = ({
-  placeSelected,
-  position,
-  category = null,
-  handleChangeRegion,
-  handleCurrentPositionUser,
-}) => {
+const Maps: React.FC<MapsProps> = ({ position, category = null }) => {
   const { token } = useAuth();
   const [markers, setMarkers] = useState<MarkerProps[]>([]);
   const navigation = useNavigation();
@@ -86,12 +77,10 @@ const Maps: React.FC<MapsProps> = ({
     [navigation],
   );
 
-  return (
+  return position.latitude ? (
     <MapView
       style={{ flex: 1 }}
-      region={position.latitude ? position : placeSelected}
-      onRegionChangeComplete={handleChangeRegion}
-      onMapReady={handleCurrentPositionUser}
+      initialRegion={position}
       showsPointsOfInterest={false}
       showsCompass={false}
       showsMyLocationButton={false}
@@ -100,10 +89,7 @@ const Maps: React.FC<MapsProps> = ({
       maxZoomLevel={20}
       customMapStyle={MapStyle}
     >
-      <Marker
-        key="position-user"
-        coordinate={position.latitude ? position : placeSelected}
-      >
+      <Marker key="position-user" coordinate={position}>
         <PositionUser />
       </Marker>
 
@@ -123,6 +109,8 @@ const Maps: React.FC<MapsProps> = ({
         </Marker>
       ))}
     </MapView>
+  ) : (
+    <ActivityIndicator color="#000000" />
   );
 };
 
