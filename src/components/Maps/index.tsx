@@ -24,7 +24,8 @@ interface MapsProps {
   placeSelected: GeoLocationProps;
   position: GeoLocationProps;
   category: number | null;
-  handleChangeRegion(): void;
+  handleChangeRegion(newPosition: object): void;
+  handleCurrentPositionUser(): void;
 }
 
 interface CategoryProps {
@@ -49,6 +50,7 @@ const Maps: React.FC<MapsProps> = ({
   position,
   category = null,
   handleChangeRegion,
+  handleCurrentPositionUser,
 }) => {
   const { token } = useAuth();
   const [markers, setMarkers] = useState<MarkerProps[]>([]);
@@ -89,7 +91,7 @@ const Maps: React.FC<MapsProps> = ({
       style={{ flex: 1 }}
       region={position.latitude ? position : placeSelected}
       onRegionChangeComplete={handleChangeRegion}
-      followsUserLocation
+      onMapReady={handleCurrentPositionUser}
       showsPointsOfInterest={false}
       showsCompass={false}
       showsMyLocationButton={false}

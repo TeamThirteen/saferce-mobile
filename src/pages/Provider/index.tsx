@@ -4,6 +4,7 @@ import {
   TouchableOpacity,
   Alert,
   ActivityIndicator,
+  RefreshControl,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 
@@ -76,33 +77,36 @@ const Provider: React.FC<Props> = ({ route }) => {
   const navigation = useNavigation();
   const [provider, setProvider] = useState({} as ProviderProps);
   const [loading, setLoading] = useState(false);
+  const [refreshing, setRefreshing] = useState(false);
+
+  const loadDetailsProvider = useCallback(async () => {
+    setLoading(true);
+    setRefreshing(true);
+
+    try {
+      const response = await api.get<ProviderProps>(`providers/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      setProvider(response.data);
+      setRefreshing(false);
+    } catch (err) {
+      Alert.alert(
+        'Ooops!',
+        'Houve um erro ao carregar as informações do provedor.',
+      );
+
+      navigation.goBack();
+    } finally {
+      setLoading(false);
+    }
+  }, [id, token, navigation]);
 
   useEffect(() => {
-    async function loadDetailsProvider(): Promise<void> {
-      setLoading(true);
-
-      try {
-        const response = await api.get<ProviderProps>(`providers/${id}`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-
-        setProvider(response.data);
-      } catch (err) {
-        Alert.alert(
-          'Ooops!',
-          'Houve um erro ao carregar as informações do provedor.',
-        );
-
-        navigation.goBack();
-      } finally {
-        setLoading(false);
-      }
-    }
-
     loadDetailsProvider();
-  }, [id, token, navigation]);
+  }, [loadDetailsProvider]);
 
   const doCall = useCallback((phone: string) => {
     Linking.openURL(`tel:${phone}`);
@@ -117,7 +121,14 @@ const Provider: React.FC<Props> = ({ route }) => {
   }, []);
 
   return (
-    <Container>
+    <Container
+      refreshControl={
+        <RefreshControl
+          refreshing={refreshing}
+          onRefresh={loadDetailsProvider}
+        />
+      }
+    >
       {!loading ? (
         <ProviderWrapper>
           <ProviderWrapperImage>

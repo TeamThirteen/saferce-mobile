@@ -33,6 +33,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
       textInputProps={{
         onFocus: () => {
           setIsFocused(true);
+          onShowCategoriesFilter();
         },
         onBlur: () => {
           setIsFocused(false);

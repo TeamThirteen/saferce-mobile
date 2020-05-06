@@ -40,23 +40,6 @@ const Main: React.FC = () => {
   const [filterCategory, setFilterCategory] = useState(null);
 
   useEffect(() => {
-    async function loadUserLocation(): Promise<void> {
-      try {
-        const geoLocationUser = await Geolocation();
-
-        const coordinates = {
-          latitude: geoLocationUser.coords.latitude,
-          longitude: geoLocationUser.coords.longitude,
-          latitudeDelta: 0.04,
-          longitudeDelta: 0.05,
-        };
-
-        setPosition(coordinates);
-      } catch (error) {
-        Alert.alert('Permissão Negada para Localização');
-      }
-    }
-
     async function loadCategories(): Promise<void> {
       try {
         const response = await api.get<CategoriesProps[]>('categories', {
@@ -71,9 +54,29 @@ const Main: React.FC = () => {
       }
     }
 
-    loadUserLocation();
     loadCategories();
   }, [token]);
+
+  const handleCurrentPositionUser = useCallback(async () => {
+    try {
+      const geoLocationUser = await Geolocation();
+
+      const coordinates = {
+        latitude: geoLocationUser.coords.latitude,
+        longitude: geoLocationUser.coords.longitude,
+        latitudeDelta: 0.04,
+        longitudeDelta: 0.05,
+      };
+
+      setPosition(coordinates);
+    } catch (error) {
+      Alert.alert('Permissão Negada para Localização');
+    }
+  }, []);
+
+  const handleShowCategoriesFilter = useCallback(() => {
+    setShowFilterCategory(!showFilterCategory);
+  }, [showFilterCategory]);
 
   const handleLocationMap = useCallback((data, { geometry }) => {
     const {
@@ -90,10 +93,6 @@ const Main: React.FC = () => {
     setPosition(placeSelected);
   }, []);
 
-  const handleShowCategoriesFilter = useCallback(() => {
-    setShowFilterCategory(!showFilterCategory);
-  }, [showFilterCategory]);
-
   const handleProviderByCategory = useCallback((categoryId) => {
     setFilterCategory(categoryId);
   }, []);
@@ -109,6 +108,7 @@ const Main: React.FC = () => {
           placeSelected={userLocation}
           position={position}
           category={filterCategory}
+          handleCurrentPositionUser={handleCurrentPositionUser}
           handleChangeRegion={handleChangeRegion}
         />
       )}
