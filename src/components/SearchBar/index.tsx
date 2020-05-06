@@ -10,11 +10,13 @@ import Theme from '../../theme';
 interface SearchBarProps {
   onLocationSelect(data: object, details: object): void;
   onShowCategoriesFilter(): void;
+  disabledFilterCategories(): void;
 }
 
 const SearchBar: React.FC<SearchBarProps> = ({
   onLocationSelect,
   onShowCategoriesFilter,
+  disabledFilterCategories,
 }) => {
   const [isFocused, setIsFocused] = useState(false);
 
@@ -26,6 +28,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
       keyboardAppearance="light"
       enablePoweredByContainer={false}
       fetchDetails
+      currentLocation={false}
       renderLeftButton={() => (
         <Categories onShowCategoriesFilter={onShowCategoriesFilter} />
       )}
@@ -33,7 +36,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
       textInputProps={{
         onFocus: () => {
           setIsFocused(true);
-          onShowCategoriesFilter();
+          disabledFilterCategories();
         },
         onBlur: () => {
           setIsFocused(false);

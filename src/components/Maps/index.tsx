@@ -23,6 +23,7 @@ interface GeoLocationProps {
 interface MapsProps {
   position: GeoLocationProps;
   category: number | null;
+  handleLocationUserClick(newPosition: object): void;
 }
 
 interface CategoryProps {
@@ -42,7 +43,11 @@ interface MarkerProps {
   rating: number;
 }
 
-const Maps: React.FC<MapsProps> = ({ position, category = null }) => {
+const Maps: React.FC<MapsProps> = ({
+  position,
+  handleLocationUserClick,
+  category = null,
+}) => {
   const { token } = useAuth();
   const [markers, setMarkers] = useState<MarkerProps[]>([]);
   const navigation = useNavigation();
@@ -80,10 +85,11 @@ const Maps: React.FC<MapsProps> = ({ position, category = null }) => {
   return position.latitude ? (
     <MapView
       style={{ flex: 1 }}
-      initialRegion={position}
+      region={position}
       showsPointsOfInterest={false}
       showsCompass={false}
       showsMyLocationButton={false}
+      onPress={handleLocationUserClick}
       loadingEnabled
       minZoomLevel={10}
       maxZoomLevel={20}

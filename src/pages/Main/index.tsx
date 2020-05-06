@@ -28,12 +28,7 @@ const Main: React.FC = () => {
   const { token } = useAuth();
 
   const [categories, setCategories] = useState([] as CategoriesProps[]);
-  const [position, setPosition] = useState({
-    latitude: -22.736997,
-    longitude: -47.647893,
-    latitudeDelta: 0.04,
-    longitudeDelta: 0.05,
-  } as GeoLocationProps);
+  const [position, setPosition] = useState({} as GeoLocationProps);
   const [showFilterCategory, setShowFilterCategory] = useState(false);
   const [filterCategory, setFilterCategory] = useState(null);
 
@@ -51,7 +46,7 @@ const Main: React.FC = () => {
 
         setPosition(coordinates);
       } catch (error) {
-        Alert.alert('Permissão Negada para Localização');
+        Alert.alert('Permissão Negada', 'Não foi possível obter a localização');
       }
     }
 
@@ -77,32 +72,55 @@ const Main: React.FC = () => {
     setShowFilterCategory(!showFilterCategory);
   }, [showFilterCategory]);
 
+  const disabledFilterCategories = useCallback(() => {
+    setShowFilterCategory(false);
+  }, []);
+
   const handleLocationMap = useCallback((data, { geometry }) => {
     const {
       location: { lat: latitude, lng: longitude },
     } = geometry;
 
-    const placeSelected = {
+    const locationSelected = {
       latitude,
       longitude,
       latitudeDelta: 0.04,
       longitudeDelta: 0.05,
     };
 
-    setPosition(placeSelected);
+    setPosition(locationSelected);
   }, []);
 
   const handleProviderByCategory = useCallback((categoryId) => {
     setFilterCategory(categoryId);
   }, []);
 
+  const handleLocationUserClick = useCallback((newPosition) => {
+    const { latitude, longitude } = newPosition.nativeEvent.coordinate;
+
+    const payload = {
+      latitude,
+      longitude,
+      latitudeDelta: 0.04,
+      longitudeDelta: 0.05,
+    };
+    setPosition(payload);
+  }, []);
+
   return (
     <Container>
-      {position && <Maps position={position} category={filterCategory} />}
+      {position && (
+        <Maps
+          handleLocationUserClick={handleLocationUserClick}
+          position={position}
+          category={filterCategory}
+        />
+      )}
 
       <SearchBar
         onLocationSelect={handleLocationMap}
         onShowCategoriesFilter={handleShowCategoriesFilter}
+        disabledFilterCategories={disabledFilterCategories}
       />
 
       {showFilterCategory && (

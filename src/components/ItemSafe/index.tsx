@@ -1,5 +1,5 @@
 import React from 'react';
-import Icon from 'react-native-vector-icons/FontAwesome5';
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import { Container, ItemImage, ItemTitle } from './styles';
 
 interface ItemSafeProps {
@@ -17,7 +17,7 @@ const ItemSafe: React.FC<ItemProps> = ({ item }) => {
   return (
     <Container>
       <ItemImage color={item.color}>
-        <Icon name={item.icon} color="#FFFFFF" size={25} />
+        <FontAwesome5 name={item.icon} color="#FFFFFF" size={25} />
       </ItemImage>
       <ItemTitle>{item.description}</ItemTitle>
     </Container>

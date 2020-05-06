@@ -1,20 +1,22 @@
-import { PermissionsAndroid, Platform } from 'react-native';
-import Geolocation, {
-  GeolocationResponse,
-} from '@react-native-community/geolocation';
+import { PermissionsAndroid, Platform, Alert } from 'react-native';
+import Geolocation, { GeoPosition } from 'react-native-geolocation-service';
 
 Geolocation.setRNConfiguration({
   skipPermissionRequests: false,
   authorizationLevel: 'auto',
 });
 
-const callLocation = (): Promise<GeolocationResponse> => {
+const callLocation = (): Promise<GeoPosition> => {
   return new Promise((resolve) => {
     Geolocation.getCurrentPosition(
       (position) => {
         resolve(position);
       },
-      () => ({}),
+      (err) =>
+        Alert.alert(
+          'Permissão Negada',
+          `${err.code},${err.message} Não foi possível obter a localização`,
+        ),
       {
         enableHighAccuracy: true,
         maximumAge: 1000,
@@ -24,13 +26,14 @@ const callLocation = (): Promise<GeolocationResponse> => {
   });
 };
 
-const getWatchPosition = (): Promise<GeolocationResponse> => {
+const getWatchPosition = (): Promise<GeoPosition> => {
   return new Promise((resolve) => {
     Geolocation.watchPosition(
       (position) => {
         resolve(position);
       },
-      () => ({}),
+      () =>
+        Alert.alert('Permissão Negada', 'Não foi possível obter a localização'),
       {
         enableHighAccuracy: true,
         maximumAge: 1000,
@@ -40,7 +43,7 @@ const getWatchPosition = (): Promise<GeolocationResponse> => {
   });
 };
 
-async function requestLocationPermission(): Promise<GeolocationResponse> {
+async function requestLocationPermission(): Promise<GeoPosition> {
   const granted = await PermissionsAndroid.request(
     PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
     {
@@ -52,6 +55,7 @@ async function requestLocationPermission(): Promise<GeolocationResponse> {
 
   if (granted === PermissionsAndroid.RESULTS.GRANTED) {
     const response = await callLocation();
+
     return response;
   }
 
@@ -69,7 +73,7 @@ async function requestLocationPermission(): Promise<GeolocationResponse> {
   };
 }
 
-const getUserCurrentPosition = async (): Promise<GeolocationResponse> => {
+const getUserCurrentPosition = async (): Promise<GeoPosition> => {
   if (Platform.OS === 'ios') {
     return callLocation();
   }
