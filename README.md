@@ -28,6 +28,8 @@ Saferce is an application where users can find service providers closest to thei
 
 Essa aplicação funciona apenas em dispositivos com sistema operacional **Android**. Isto é, não foi testado e nem executado em um sistema operacional **iOS** por falta de equipamento.
 
+Ao entrar na aplicação digite **Piracicaba,SP** na barra de pesquisa e clique sobre o resultado para ver as localidades cadastradas.
+
 ### <a name='DeviceTest'></a>Device Test:
 
 - Pixel API 28

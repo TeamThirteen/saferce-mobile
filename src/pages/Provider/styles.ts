@@ -11,12 +11,7 @@ interface ItemSafeProps {
   icon: string;
 }
 
-export const Container = styled.ScrollView.attrs({
-  contentContainerSyle: {
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-})`
+export const Container = styled.ScrollView`
   flex: 1;
   width: 100%;
 `;

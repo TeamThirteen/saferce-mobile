@@ -81,7 +81,6 @@ const Provider: React.FC<Props> = ({ route }) => {
 
   const loadDetailsProvider = useCallback(async () => {
     setLoading(true);
-    setRefreshing(true);
 
     try {
       const response = await api.get<ProviderProps>(`providers/${id}`, {
@@ -104,6 +103,11 @@ const Provider: React.FC<Props> = ({ route }) => {
     }
   }, [id, token, navigation]);
 
+  const onRefreshing = useCallback(() => {
+    setRefreshing(true);
+    loadDetailsProvider();
+  }, [loadDetailsProvider]);
+
   useEffect(() => {
     loadDetailsProvider();
   }, [loadDetailsProvider]);
@@ -122,10 +126,17 @@ const Provider: React.FC<Props> = ({ route }) => {
 
   return (
     <Container
+      contentContainerStyle={{
+        justifyContent: 'center',
+        alignItems: 'center',
+        flex: 1,
+      }}
       refreshControl={
         <RefreshControl
+          progressViewOffset={30}
+          colors={['transparent', '#0000FF']}
           refreshing={refreshing}
-          onRefresh={loadDetailsProvider}
+          onRefresh={onRefreshing}
         />
       }
     >
