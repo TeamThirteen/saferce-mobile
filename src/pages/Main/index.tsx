@@ -28,7 +28,12 @@ const Main: React.FC = () => {
   const { token } = useAuth();
 
   const [categories, setCategories] = useState([] as CategoriesProps[]);
-  const [position, setPosition] = useState({} as GeoLocationProps);
+  const [position, setPosition] = useState({
+    latitude: -22.6800907,
+    longitude: -47.7218533,
+    latitudeDelta: 0.04,
+    longitudeDelta: 0.05,
+  } as GeoLocationProps);
   const [showFilterCategory, setShowFilterCategory] = useState(false);
   const [filterCategory, setFilterCategory] = useState(null);
 
@@ -104,6 +109,7 @@ const Main: React.FC = () => {
       latitudeDelta: 0.04,
       longitudeDelta: 0.05,
     };
+
     setPosition(payload);
   }, []);
 
